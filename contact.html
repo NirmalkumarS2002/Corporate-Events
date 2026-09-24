@@ -1,223 +1,895 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corporate Events - Contact Us</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#101b36;--gold:#d9a441;--mist:#edf0f5;--slate:#5b6478;--line:#d7dce6;--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.6;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-ul{list-style:none}
-img{display:block;max-width:100%}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.wrap{max-width:1540px;margin:0 auto;padding-inline:clamp(20px,5vw,56px)}
-.sec{padding-block:clamp(60px,8vw,100px)}
-.btn{display:inline-block;padding:14px 26px;border-radius:4px;font-weight:700;font-size:15px;background:var(--gold);color:var(--ink);transition:.3s;cursor:pointer;border:2px solid var(--gold);font-family:inherit}
-.btn:hover{background:transparent;color:var(--gold)}
-.sh{font-size:clamp(30px,4.2vw,50px);max-width:640px;margin-bottom:14px}
-.sp{color:var(--slate);max-width:520px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Events - Contact Us</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --ink: #101b36;
+            --gold: #d9a441;
+            --mist: #edf0f5;
+            --slate: #5b6478;
+            --line: #d7dce6;
+            --serif: "Fraunces", Georgia, serif;
+            --sans: "Manrope", system-ui, sans-serif
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--ink);
+            background: #fff;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        ul {
+            list-style: none
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--serif);
+            font-weight: 600;
+            line-height: 1.1
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 3px
+        }
+
+        .wrap {
+            max-width: 1540px;
+            margin: 0 auto;
+            padding-inline: clamp(20px, 5vw, 56px)
+        }
+
+        .sec {
+            padding-block: clamp(60px, 8vw, 100px);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 26px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 15px;
+            background: var(--gold);
+            color: var(--ink);
+            transition: .3s;
+            cursor: pointer;
+            border: 2px solid var(--gold);
+            font-family: inherit
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--gold)
+        }
+
+        .sh {
+            font-size: clamp(30px, 4.2vw, 50px);
+            max-width: 640px;
+            margin-bottom: 14px
+        }
+
+        .sp {
+            color: var(--slate);
+            max-width: 520px
+        }
 
 
-/* banner */
-.banner{background:var(--ink);color:#fff;padding-block:clamp(60px,9vw,110px)}
-.crumb{display:flex;gap:10px;font-size:14px;color:#aab3c8;margin-bottom:22px}
-.crumb a:hover{color:var(--gold)}
-.banner h1{font-size:clamp(38px,6vw,72px);max-width:860px;letter-spacing:-.02em;margin-bottom:22px}
-.banner p{color:#c4cbdb;font-size:18px;max-width:560px}
+        /* banner */
+        .banner {
+            background: var(--ink);
+            color: #fff;
+            padding-block: clamp(60px, 9vw, 110px)
+        }
 
-/* contact */
-.ct-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,90px);align-items:start}
-.info{display:grid;gap:0;margin-top:30px}
-.info li{display:flex;gap:18px;padding-block:22px;border-top:1px solid var(--line)}
-.info li:last-child{border-bottom:1px solid var(--line)}
-.info li>span{font-size:30px;color:var(--gold)}
-.info h3{font-size:19px;margin-bottom:4px}
-.info p,.info a{font-size:15px;color:var(--slate);display:block}
-.info a:hover{color:var(--ink)}
-.form{background:var(--mist);padding:clamp(24px,4vw,44px);border-radius:4px;border-top:5px solid var(--gold)}
-.form h2{font-size:30px;margin-bottom:6px}
-.form>p{color:var(--slate);font-size:14px;margin-bottom:24px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-.fld label{font-size:14px;font-weight:600}
-.fld input,.fld select,.fld textarea{font:inherit;padding:13px 14px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);width:100%}
-.fld textarea{min-height:120px;resize:vertical}
-.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
-.fld.bad input,.fld.bad select,.fld.bad textarea{border-color:#c0392b}
-.err{color:#c0392b;font-size:13px;min-height:0}
-.ok{display:none;margin-top:16px;padding:14px 16px;background:#e3f4e6;color:#1e6b31;border-radius:4px;font-weight:600;font-size:14px}
-@media(max-width:900px){.ct-grid{grid-template-columns:1fr}}
-@media(max-width:520px){.row{grid-template-columns:1fr;gap:0}}
+        .crumb {
+            display: flex;
+            gap: 10px;
+            font-size: 14px;
+            color: #aab3c8;
+            margin-bottom: 22px
+        }
 
-/* map */
-.map{padding-bottom:clamp(60px,8vw,100px)}
-.map iframe{width:100%;height:400px;border:0;border-radius:4px;filter:grayscale(.4)}
+        .crumb a:hover {
+            color: var(--gold)
+        }
 
-/* faq */
-.faq{background:var(--mist)}
-.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px)}
-.faq details{border-top:1px solid var(--line);padding-block:20px}
-.faq details:last-child{border-bottom:1px solid var(--line)}
-.faq summary{cursor:pointer;font-family:var(--serif);font-size:21px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--gold);font-size:28px;line-height:1}
-.faq details[open] summary::after{content:"\2212"}
-.faq details p{margin-top:12px;color:var(--slate);font-size:15px;max-width:560px}
-@media(max-width:860px){.faq-grid{grid-template-columns:1fr}}
+        .banner h1 {
+            font-size: clamp(38px, 6vw, 72px);
+            max-width: 860px;
+            letter-spacing: -.02em;
+            margin-bottom: 22px
+        }
 
+        .banner p {
+            color: #c4cbdb;
+            font-size: 18px;
+            max-width: 560px
+        }
 
-</style>
+        /* contact */
+        .ct-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: clamp(30px, 6vw, 90px);
+            align-items: start
+        }
+
+        .info {
+            display: grid;
+            gap: 0;
+            margin-top: 30px
+        }
+
+        .info li {
+            display: flex;
+            gap: 18px;
+            padding-block: 22px;
+            border-top: 1px solid var(--line)
+        }
+
+        .info li:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        .info li>span {
+            font-size: 30px;
+            color: var(--gold)
+        }
+
+        .info h3 {
+            font-size: 19px;
+            margin-bottom: 4px
+        }
+
+        .info p,
+        .info a {
+            font-size: 15px;
+            color: var(--slate);
+            display: block
+        }
+
+        .info a:hover {
+            color: var(--ink)
+        }
+
+        .form {
+            background: var(--mist);
+            padding: clamp(24px, 4vw, 44px);
+            border-radius: 4px;
+            border-top: 5px solid var(--gold)
+        }
+
+        .form h2 {
+            font-size: 30px;
+            margin-bottom: 6px
+        }
+
+        .form>p {
+            color: var(--slate);
+            font-size: 14px;
+            margin-bottom: 24px
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .fld {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px
+        }
+
+        .fld label {
+            font-size: 14px;
+            font-weight: 600
+        }
+
+        .fld input,
+        .fld select,
+        .fld textarea {
+            font: inherit;
+            padding: 13px 14px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            background: #fff;
+            color: var(--ink);
+            width: 100%
+        }
+
+        .fld textarea {
+            min-height: 120px;
+            resize: vertical
+        }
+
+        .fld input:focus,
+        .fld select:focus,
+        .fld textarea:focus {
+            outline: 2px solid var(--gold);
+            border-color: var(--gold)
+        }
+
+        .fld.bad input,
+        .fld.bad select,
+        .fld.bad textarea {
+            border-color: #c0392b
+        }
+
+        .err {
+            color: #c0392b;
+            font-size: 13px;
+            min-height: 0
+        }
+
+        .ok {
+            display: none;
+            margin-top: 16px;
+            padding: 14px 16px;
+            background: #e3f4e6;
+            color: #1e6b31;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px
+        }
+
+        @media(max-width:900px) {
+            .ct-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:520px) {
+            .row {
+                grid-template-columns: 1fr;
+                gap: 0
+            }
+        }
+
+        /* map */
+        .map {
+            padding-bottom: clamp(60px, 8vw, 100px)
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            border-radius: 4px;
+            filter: grayscale(.4)
+        }
+
+        /* faq */
+        .faq {
+            background: var(--mist)
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: clamp(30px, 6vw, 90px)
+        }
+
+        .faq details {
+            border-top: 1px solid var(--line);
+            padding-block: 20px
+        }
+
+        .faq details:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font-family: var(--serif);
+            font-size: 21px;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        .faq summary::-webkit-details-marker {
+            display: none
+        }
+
+        .faq summary::after {
+            content: "+";
+            color: var(--gold);
+            font-size: 28px;
+            line-height: 1
+        }
+
+        .faq details[open] summary::after {
+            content: "\2212"
+        }
+
+        .faq details p {
+            margin-top: 12px;
+            color: var(--slate);
+            font-size: 15px;
+            max-width: 560px
+        }
+
+        @media(max-width:860px) {
+            .faq-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<header class="header">
- <div class="wrap hbar">
-  <a href="index.html" class="logo"><img src="./src/logo.webp" alt="Company logo"></a>
-  <div class="menuwrap">
-   <ul class="menus">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="pages.html">Events</a></li>
-    <li><a href="services.html">Services</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-   </ul>
-   <div class="hcall errorpage"><span class="material-symbols-outlined">call</span>+91 12345 67890</div>
-  </div>
-  <a href="login.html" class="btn hb">Login</a>
-    <div class="btnwrap">
-                 <a href="login.html" class="logicon"><span class="material-symbols-outlined">person</span></a>
-           
-            <button class="menubtn" aria-label="Toggle menu"><span
-                    class="material-symbols-outlined menuspan">menu</span></button>
-            </div> </div>
-</header>
+    <header class="header">
+        <div class="wrap hbar">
+            <a href="index.html" class="logo"><img src="./src/logo.webp" alt="Company logo"></a>
+            <div class="menuwrap">
+                <ul class="menus">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pages.html">Events</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+                <div class="hcall errorpage"><span class="material-symbols-outlined">call</span>+91 12345 67890</div>
+            </div>
+            <a href="login.html" class="btn hb">Login</a>
+            <div class="btnwrap">
+                <a href="login.html" class="logicon"><span class="material-symbols-outlined">person</span></a>
 
-<section class="banner">
- <div class="wrap">
-  <div class="crumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
-  <h1>Tell us about your event. We will reply within 48 hours.</h1>
-  <p>Share your date, headcount and goals. A project lead will send venue options and a costed proposal.</p>
- </div>
-</section>
+                <button class="menubtn" aria-label="Toggle menu"><span
+                        class="material-symbols-outlined menuspan">menu</span></button>
+            </div>
+        </div>
+    </header>
 
-<section class="sec">
- <div class="wrap ct-grid">
-  <div>
-   <h2 class="sh">Talk to our events team</h2>
-   <p class="sp">Prefer to speak first? Call, email or visit our office. We are happy to meet at your venue too.</p>
-   <ul class="info">
-    <li><span class="material-symbols-outlined">location_on</span><div><h3>Office</h3><p>123, Anna Nagar, Chennai, Tamil Nadu</p></div></li>
-    <li><span class="material-symbols-outlined">call</span><div><h3>Phone</h3><a href="tel:+911234567890">+91 12345 67890</a><a href="tel:+910987654321">+91 09876 54321</a></div></li>
-    <li><span class="material-symbols-outlined">mail</span><div><h3>Email</h3><a href="mailto:hello@gmail.com">hello@gmail.com</a><a href="mailto:careers@gmail.com">careers@gmail.com</a></div></li>
-    <li><span class="material-symbols-outlined">schedule</span><div><h3>Working hours</h3><p>Monday to Saturday, 9:30 AM to 6:30 PM</p></div></li>
-   </ul>
-  </div>
+    <section class="banner">
+        <div class="wrap">
+            <div class="crumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
+            <h1>Tell us about your event. We will reply within 48 hours.</h1>
+            <p>Share your date, headcount and goals. A project lead will send venue options and a costed proposal.</p>
+        </div>
+    </section>
 
-  <form class="form" id="enquiry" novalidate>
-   <h2>Request a proposal</h2>
-   <p>Fields marked with * are required.</p>
-   <div class="row">
-    <div class="fld"><label for="name">Full name *</label><input id="name" type="text" autocomplete="name"><span class="err"></span></div>
-    <div class="fld"><label for="company">Company *</label><input id="company" type="text" autocomplete="organization"><span class="err"></span></div>
-   </div>
-   <div class="row">
-    <div class="fld"><label for="email">Work email *</label><input id="email" type="email" autocomplete="email"><span class="err"></span></div>
-    <div class="fld"><label for="phone">Phone *</label><input id="phone" type="tel" autocomplete="tel"><span class="err"></span></div>
-   </div>
-   <div class="row">
-    <div class="fld"><label for="type">Event type *</label>
-     <select id="type"><option value="">Select one</option><option>Conference or summit</option><option>Product launch</option><option>Team offsite</option><option>Award night or gala</option><option>Exhibition or trade show</option><option>Other</option></select><span class="err"></span></div>
-    <div class="fld"><label for="guests">Expected guests</label><input id="guests" type="number" min="1" placeholder="e.g. 300"><span class="err"></span></div>
-   </div>
-   <div class="fld"><label for="msg">Tell us about your event *</label><textarea id="msg" placeholder="Date, city, budget range and anything we should know"></textarea><span class="err"></span></div>
-   <button type="submit" class="btn">Send Enquiry</button>
-   <div class="ok" id="ok" role="status">Thank you. Your enquiry is sent, and we will reply within 48 hours.</div>
-  </form>
- </div>
-</section>
+    <section class="sec">
+        <div class="wrap ct-grid">
+            <div>
+                <h2 class="sh">Talk to our events team</h2>
+                <p class="sp">Prefer to speak first? Call, email or visit our office. We are happy to meet at your venue
+                    too.</p>
+                <ul class="info">
+                    <li><span class="material-symbols-outlined">location_on</span>
+                        <div>
+                            <h3>Office</h3>
+                            <p>123, Anna Nagar, Chennai, Tamil Nadu</p>
+                        </div>
+                    </li>
+                    <li><span class="material-symbols-outlined">call</span>
+                        <div>
+                            <h3>Phone</h3><a href="tel:+911234567890">+91 12345 67890</a><a href="tel:+910987654321">+91
+                                09876 54321</a>
+                        </div>
+                    </li>
+                    <li><span class="material-symbols-outlined">mail</span>
+                        <div>
+                            <h3>Email</h3><a href="mailto:hello@gmail.com">hello@gmail.com</a><a
+                                href="mailto:careers@gmail.com">careers@gmail.com</a>
+                        </div>
+                    </li>
+                    <li><span class="material-symbols-outlined">schedule</span>
+                        <div>
+                            <h3>Working hours</h3>
+                            <p>Monday to Saturday, 9:30 AM to 6:30 PM</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-<section class="map">
- <div class="wrap">
-  <iframe title="Office location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Anna+Nagar+Chennai&output=embed"></iframe>
- </div>
-</section>
+         
+<form class="form" id="enquiry" novalidate>
 
-<section class="sec faq">
- <div class="wrap faq-grid">
-  <div>
-   <h2 class="sh">Questions we hear before every booking</h2>
-   <p class="sp">Cannot find your answer? Send us a message and we will help.</p>
-  </div>
-  <div>
-   <details open><summary>How early should we contact you?</summary><p>For conferences and galas, four to six months ahead gives the best venue choice. For smaller meetings, four weeks is usually enough.</p></details>
-   <details><summary>Do you work outside Chennai and Coimbatore?</summary><p>Yes. We have produced events in over 40 cities and manage travel, venues and local vendors wherever you need them.</p></details>
-   <details><summary>How is pricing decided?</summary><p>Every proposal lists each cost line by line: venue, production, catering and staff. You approve the budget before we book anything.</p></details>
-   <details><summary>Can you run hybrid or virtual events?</summary><p>Yes. We provide live streaming, virtual attendee tools and a broadcast crew for hybrid summits and launches.</p></details>
-  </div>
- </div>
-</section>
+    <h2>Request a proposal</h2>
 
-<footer class="footer">
- <div class="wrap">
-  <div class="f-top">
-   <a href="index.html"><img src="./src/logo.webp" alt="Company logo"></a>
-   <div>
-    <div class="subform"><input type="email" placeholder="Work email for event updates" id="subemail" aria-label="Email"><button class="subscribe-btn">Subscribe</button></div>
-    <p class="frmerr"></p>
-   </div>
-  </div>
-  <div class="f-grid">
-   <div><h4>About Us</h4><p>We design and deliver corporate events built on planning, calm delivery and clear budgets.</p><p>Since 2011</p></div>
-   <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="pages.html">Events</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
-   <div><h4>Company</h4><a href="404.html">Pricing</a><a href="404.html">Team</a><a href="404.html">Careers</a><a href="404.html">Terms and conditions</a><a href="404.html">Privacy policy</a></div>
-   <div><h4>Office</h4><p>123, Anna Nagar<br>Chennai, Tamil Nadu</p><a href="404.html">hello@gmail.com</a><a href="404.html">careers@gmail.com</a></div>
-   <div><h4>Call Us</h4><a href="404.html">+91 12345 67890</a><a href="404.html">+91 09876 54321</a>
-    <div class="f-soc"><a href="404.html" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a></div>
-   </div>
-  </div>
-  <div class="f-bot">© 2026 All Rights Reserved by Stackly</div>
- </div>
-</footer>
+    <p>Fields marked with * are required.</p>
 
-<script src="script.js"></script>
+    <div class="row">
 
-<script>
+        <div class="fld">
+            <label for="cname">Full name *</label>
+
+            <input id="cname"
+                type="text"
+                placeholder="Enter Your Name"
+                autocomplete="name">
+
+            <span class="err"></span>
+        </div>
+
+        <div class="fld">
+            <label for="ccompany">Company *</label>
+
+            <input id="ccompany"
+                type="text"
+                placeholder="Enter Your Company"
+                autocomplete="organization">
+
+            <span class="err"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="fld">
+            <label for="cemail">Work email *</label>
+
+            <input id="cemail"
+                type="email"
+                autocomplete="email"
+                placeholder="Enter Your Email">
+
+            <span class="err"></span>
+        </div>
+
+        <div class="fld">
+            <label for="cphone">Phone *</label>
+
+            <input id="cphone"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Enter Your Number">
+
+            <span class="err"></span>
+        </div>
+
+    </div>
+
+    <div class="fld">
+
+        <label for="cguest">Expected guests *</label>
+
+        <input id="cguest"
+            type="number"
+            min="1"
+            placeholder="e.g. 300">
+
+        <span class="err"></span>
+
+    </div>
+
+    <div class="fld">
+
+        <label for="carea">Tell us about your event *</label>
+
+        <textarea id="carea"
+            placeholder="Date, city, budget range and anything we should know"></textarea>
+
+        <span class="err"></span>
+
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+
+        <button type="submit" class="btn">
+            Send Enquiry
+        </button>
+
+        <span class="err"></span>
+
+    </div>
+
+    <div class="ok" id="ok" role="status">
+
+        Thank you. Your enquiry is sent, and we will reply within 48 hours.
+
+    </div>
+
+</form>
+        </div>
+    </section>
+
+    <section class="map">
+        <div class="wrap">
+            <iframe title="Office location map" loading="lazy"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=80.1900%2C13.0650%2C80.2300%2C13.1050&layer=mapnik&marker=13.0850%2C80.2101"></iframe>
+        </div>
+    </section>
+
+    <section class="sec faq">
+        <div class="wrap faq-grid">
+            <div>
+                <h2 class="sh">Questions we hear before every booking</h2>
+                <p class="sp">Cannot find your answer? Send us a message and we will help.</p>
+            </div>
+            <div>
+                <details open>
+                    <summary>How early should we contact you?</summary>
+                    <p>For conferences and galas, four to six months ahead gives the best venue choice. For smaller
+                        meetings, four weeks is usually enough.</p>
+                </details>
+                <details>
+                    <summary>Do you work outside Chennai and Coimbatore?</summary>
+                    <p>Yes. We have produced events in over 40 cities and manage travel, venues and local vendors
+                        wherever you need them.</p>
+                </details>
+                <details>
+                    <summary>How is pricing decided?</summary>
+                    <p>Every proposal lists each cost line by line: venue, production, catering and staff. You approve
+                        the budget before we book anything.</p>
+                </details>
+                <details>
+                    <summary>Can you run hybrid or virtual events?</summary>
+                    <p>Yes. We provide live streaming, virtual attendee tools and a broadcast crew for hybrid summits
+                        and launches.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="wrap">
+            <div class="f-top">
+                <a href="index.html"><img src="./src/logo.webp" alt="Company logo"></a>
+                <div>
+                    <div class="subform"><input type="email" placeholder="Work email for event updates" id="subemail"
+                            aria-label="Email"><button class="subscribe-btn">Subscribe</button></div>
+                    <p class="frmerr"></p>
+                </div>
+            </div>
+            <div class="f-grid">
+                <div>
+                    <h4>About Us</h4>
+                    <p>We design and deliver corporate events built on planning, calm delivery and clear budgets.</p>
+                    <p>Since 2011</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a
+                        href="pages.html">Events</a><a href="services.html">Services</a><a
+                        href="contact.html">Contact</a>
+                </div>
+                <div>
+                    <h4>Company</h4><a href="404.html">Pricing</a><a href="404.html">Team</a><a
+                        href="404.html">Careers</a><a href="404.html">Terms and conditions</a><a href="404.html">Privacy
+                        policy</a>
+                </div>
+                <div>
+                    <h4>Office</h4>
+                    <p>123, Anna Nagar<br>Chennai, Tamil Nadu</p><a href="404.html">hello@gmail.com</a><a
+                        href="404.html">careers@gmail.com</a>
+                </div>
+                <div>
+                    <h4>Call Us</h4><a href="404.html">+91 12345 67890</a><a href="404.html">+91 09876 54321</a>
+                    <div class="f-soc"><a href="404.html" aria-label="WhatsApp"><i
+                                class="fa-brands fa-whatsapp"></i></a><a href="404.html" aria-label="LinkedIn"><i
+                                class="fa-brands fa-linkedin-in"></i></a><a href="404.html" aria-label="Instagram"><i
+                                class="fa-brands fa-instagram"></i></a><a href="404.html" aria-label="X"><i
+                                class="fa-brands fa-x-twitter"></i></a></div>
+                </div>
+            </div>
+            <div class="f-bot">© 2026 All Rights Reserved by Stackly</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
 
 
-// Enquiry form validation
-const form=document.getElementById("enquiry"),ok=document.getElementById("ok");
-const rules={
- name:v=>v.length>=2||"Enter your full name",
- company:v=>v.length>=2||"Enter your company name",
- email:v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)||"Enter a valid work email",
- phone:v=>/^[+]?[\d\s-]{8,15}$/.test(v)||"Enter a valid phone number",
- type:v=>v!==""||"Select an event type",
- guests:v=>v===""||+v>0||"Enter a number greater than 0",
- msg:v=>v.length>=10||"Add a few details (at least 10 characters)"
-};
-function check(id){
- const el=document.getElementById(id),box=el.parentElement,r=rules[id](el.value.trim());
- box.classList.toggle("bad",r!==true);
- box.querySelector(".err").textContent=r===true?"":r;
- return r===true;
+
+const form = document.querySelector("#enquiry");
+
+const cname = document.querySelector("#cname");
+const ccompany = document.querySelector("#ccompany");
+const cemail = document.querySelector("#cemail");
+const cphone = document.querySelector("#cphone");
+const cguest = document.querySelector("#cguest");
+const carea = document.querySelector("#carea");
+
+const ok = document.querySelector("#ok");
+
+
+// Error Message Function
+function showError(input, message) {
+
+    const fld = input.parentElement;
+    const err = fld.querySelector(".err");
+
+    err.textContent = message;
+
+    input.style.border = "1px solid red";
+
 }
-Object.keys(rules).forEach(id=>document.getElementById(id).addEventListener("blur",()=>check(id)));
-form.addEventListener("submit",e=>{
- e.preventDefault();
- ok.style.display="none";
- const valid=Object.keys(rules).map(check).every(Boolean);
- if(valid){form.reset();ok.style.display="block"}
+
+
+// Clear Error Function
+function clearError(input) {
+
+    const fld = input.parentElement;
+    const err = fld.querySelector(".err");
+
+    err.textContent = "";
+
+    input.style.border = "";
+
+}
+
+
+// Name Validation
+cname.addEventListener("input", () => {
+
+    // Allow only letters and spaces
+    cname.value = cname.value.replace(/[^A-Za-z\s]/g, "");
+
+    if (cname.value.trim() === "") {
+
+        showError(cname, "Name is required");
+
+    } else {
+
+        clearError(cname);
+
+    }
+
 });
 
 
-</script>
+// Company Validation
+ccompany.addEventListener("input", () => {
+
+    if (ccompany.value.trim() === "") {
+
+        showError(ccompany, "Company name is required");
+
+    } else {
+
+        clearError(ccompany);
+
+    }
+
+});
+
+
+// Email Validation
+cemail.addEventListener("input", () => {
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (cemail.value.trim() === "") {
+
+        showError(cemail, "Email is required");
+
+    } else if (!emailPattern.test(cemail.value.trim())) {
+
+        showError(cemail, "Enter a valid email");
+
+    } else {
+
+        clearError(cemail);
+
+    }
+
+});
+
+
+// Phone Validation
+cphone.addEventListener("input", () => {
+
+    // Remove letters and special characters
+    cphone.value = cphone.value.replace(/\D/g, "");
+
+    if (cphone.value.length !== 10) {
+
+        showError(cphone, "Enter a valid 10-digit phone number");
+
+    } else {
+
+        clearError(cphone);
+
+    }
+
+});
+
+
+// Expected Guests Validation
+cguest.addEventListener("input", () => {
+
+    if (cguest.value === "") {
+
+        showError(cguest, "Enter expected guests");
+
+    } else if (Number(cguest.value) < 1) {
+
+        showError(cguest, "Guests must be at least 1");
+
+    } else {
+
+        clearError(cguest);
+
+    }
+
+});
+
+
+// Message Validation
+carea.addEventListener("input", () => {
+
+    if (carea.value.trim() === "") {
+
+        showError(carea, "Message is required");
+
+    } else {
+
+        clearError(carea);
+
+    }
+
+});
+
+
+// Form Submit
+form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    let isValid = true;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    // Name
+    if (cname.value.trim() === "") {
+
+        showError(cname, "Name is required");
+
+        isValid = false;
+
+    } else {
+
+        clearError(cname);
+
+    }
+
+
+    // Company
+    if (ccompany.value.trim() === "") {
+
+        showError(ccompany, "Company name is required");
+
+        isValid = false;
+
+    } else {
+
+        clearError(ccompany);
+
+    }
+
+
+    // Email
+    if (cemail.value.trim() === "") {
+
+        showError(cemail, "Email is required");
+
+        isValid = false;
+
+    } else if (!emailPattern.test(cemail.value.trim())) {
+
+        showError(cemail, "Enter a valid email");
+
+        isValid = false;
+
+    } else {
+
+        clearError(cemail);
+
+    }
+
+
+    // Phone
+    if (cphone.value.length !== 10) {
+
+        showError(cphone, "Enter a valid 10-digit phone number");
+
+        isValid = false;
+
+    } else {
+
+        clearError(cphone);
+
+    }
+
+
+    // Guests
+    if (cguest.value === "" || Number(cguest.value) < 1) {
+
+        showError(cguest, "Enter valid expected guests");
+
+        isValid = false;
+
+    } else {
+
+        clearError(cguest);
+
+    }
+
+
+    // Message
+    if (carea.value.trim() === "") {
+
+        showError(carea, "Message is required");
+
+        isValid = false;
+
+    } else {
+
+        clearError(carea);
+
+    }
+
+
+    // Final Result
+    if (isValid) {
+
+        ok.style.display = "block";
+
+        form.reset();
+
+        console.log("Form submitted successfully");
+
+        setTimeout(()=>{
+            window.location.href="404.html"
+        },2000)
+
+    } else {
+
+        ok.style.display = "none";
+
+    }
+
+});
+
+
+    </script>
 </body>
+
 </html>
