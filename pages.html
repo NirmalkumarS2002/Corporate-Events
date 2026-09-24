@@ -85,6 +85,173 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 .cta .btn.ghost:hover{background:var(--ink);color:#fff}
 
 
+/**/
+
+/* ===== Keyframes ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(32px) } }
+@keyframes fromLeft { from { opacity: 0; transform: translateX(-48px) } }
+@keyframes fromRight { from { opacity: 0; transform: translateX(48px) } }
+@keyframes pop { from { opacity: 0; transform: scale(.6) } }
+@keyframes zoomIn { from { opacity: 0; transform: scale(1.08) } }
+@keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+@keyframes draw { from { transform: scaleX(0) } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 27, 54, .45) } 100% { box-shadow: 0 0 0 16px rgba(16, 27, 54, 0) } }
+
+/* ===== Scroll reveal (JS adds .rv, then .in when visible) ===== */
+.js-anim .rv { opacity: 0 }
+.js-anim .rv.in {
+    opacity: 1;
+    animation: var(--anim, fadeUp) .8s cubic-bezier(.2, .7, .2, 1) var(--d, 0s) backwards
+}
+.rv-left { --anim: fromLeft }
+.rv-right { --anim: fromRight }
+.rv-pop { --anim: pop }
+
+/* ===== Hero (plays on load) ===== */
+.hero h1 { animation: fadeUp .9s .1s backwards }
+.hero p.lead { animation: fadeUp .9s .25s backwards }
+.hero .hero-btns { animation: fadeUp .9s .4s backwards }
+.hero-media > img { animation: zoomIn 1.2s .2s backwards; transition: box-shadow .4s }
+.hero-media:hover > img { box-shadow: 0 24px 60px rgba(0, 0, 0, .4) }
+.agenda { animation: pop .8s .7s backwards, float 6s 1.6s ease-in-out infinite; transition: box-shadow .3s }
+.agenda:hover { box-shadow: 0 26px 55px rgba(0, 0, 0, .5) }
+.agenda li { transition: transform .25s }
+.agenda li:hover { transform: translateX(6px) }
+
+/* ===== Buttons ===== */
+.btn { transition: .3s }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0, 0, 0, .25) }
+.btn:active { transform: translateY(0) }
+.cta .btn:not(.ghost) { animation: pulse 2s infinite }
+.cta .btn:not(.ghost):hover { animation: none }
+
+/* ===== Numbers ===== */
+.num { position: relative; transition: background .3s }
+.num h2 { transition: color .3s, transform .3s }
+.num::after {
+    content: ""; position: absolute; left: 24px; right: 24px; bottom: 0; height: 3px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .4s
+}
+.num:hover { background: rgba(217, 164, 65, .1) }
+.num:hover h2 { color: var(--gold); transform: translateY(-4px) }
+.num:hover::after { transform: scaleX(1) }
+
+/* ===== Services ===== */
+.svc-row > span { transition: transform .35s, color .3s }
+.svc-row:hover > span:first-child { transform: scale(1.2) rotate(-6deg) }
+.svc-row:hover > span:last-child { transform: translate(6px, -6px); color: var(--gold) }
+
+/* ===== Upcoming events ===== */
+.ev { transition: background .3s, padding-left .3s }
+.ev:hover { background: rgba(255, 255, 255, .06); padding-left: 16px }
+.ev-date, .ev h3, .ev .tag, .ev .reg { transition: .3s }
+.ev:hover .ev-date { color: var(--gold); transform: scale(1.08) }
+.ev:hover h3 { color: var(--gold) }
+.ev .tag:hover { background: var(--gold); color: var(--ink) }
+.ev .reg:hover { color: var(--gold); letter-spacing: .04em }
+
+/* ===== Why us ===== */
+.why-img img { transition: box-shadow .4s }
+.why-img:hover img { box-shadow: 0 26px 50px rgba(16, 27, 54, .25) }
+.why-img figcaption { transition: transform .3s }
+.why-img:hover figcaption { transform: translateY(-8px) }
+.why-img.in figcaption { animation: pop .7s .5s backwards }
+.why-list li { transition: transform .3s }
+.why-list li:hover { transform: translateX(8px) }
+.why-list span { transition: transform .35s }
+.why-list li:hover span { transform: scale(1.25) rotate(-8deg) }
+
+/* ===== Process ===== */
+.js-anim .steps::before { transform: scaleX(0); transform-origin: left }
+.js-anim .steps.in::before { animation: draw 1.4s .2s ease forwards }
+.js-anim .step.in .dot { animation: pop .6s calc(var(--d, 0s) + .25s) backwards }
+.step { transition: transform .3s }
+.step:hover { transform: translateY(-6px) }
+.dot { transition: .3s }
+.step:hover .dot { background: var(--gold); color: var(--ink); transform: scale(1.15) }
+
+/* ===== Testimonials ===== */
+.q-side > div { transition: padding-left .3s, border-color .3s }
+.q-side > div:hover { padding-left: 32px; border-left-color: var(--ink) }
+.who img { transition: transform .3s, box-shadow .3s }
+.who:hover img { transform: scale(1.12); box-shadow: 0 0 0 3px var(--gold) }
+
+/* ===== Team ===== */
+.tm { transition: transform .4s }
+.tm:hover { transform: translateY(-8px) }
+.tm-img img { transition: filter .5s, transform .6s }
+.tm:hover .tm-img img { transform: scale(1.07) }
+.tm-soc { transform: translateY(100%); transition: transform .35s }
+.tm:hover .tm-soc, .tm:focus-within .tm-soc { transform: none }
+.tm h3 { transition: color .3s }
+.tm:hover h3 { color: var(--gold) }
+@media (hover: none) { .tm-soc { transform: none } }
+
+/* ===== Footer ===== */
+.f-grid a { position: relative; transition: .3s }
+.f-grid a:hover { left: 4px; color: var(--gold) }
+.f-soc a:hover { left: 0; top: -4px }
+.f-top img { transition: transform .3s }
+.f-top a:hover img { transform: scale(1.05) }
+
+/* ===== About page ===== */
+.crumb { animation: fadeUp .7s backwards }
+.crumb a { transition: color .3s }
+.banner h1 { animation: fadeUp .9s .1s backwards }
+.banner p { animation: fadeUp .9s .25s backwards }
+
+.story-img img { transition: box-shadow .4s }
+.story-img:hover img { box-shadow: 0 26px 50px rgba(16, 27, 54, .25) }
+.story-img figcaption { transition: transform .3s }
+.story-img:hover figcaption { transform: translateY(-8px) }
+.story-img.in figcaption { animation: pop .7s .5s backwards }
+
+.mvv-grid > div { transition: transform .35s, border-color .3s, box-shadow .35s }
+.mvv-grid > div:hover { transform: translateY(-8px); border-top-color: var(--gold); box-shadow: 0 16px 30px rgba(16, 27, 54, .1) }
+.mvv-grid span { display: inline-block; transition: transform .4s }
+.mvv-grid > div:hover span { transform: scale(1.2) rotate(-8deg) }
+
+.tl-row { transition: padding-left .3s, background .3s }
+.tl-row:hover { padding-left: 14px; background: var(--mist) }
+.tl-row b { transition: transform .3s; transform-origin: left center }
+.tl-row:hover b { transform: scale(1.12) }
+
+.cta-btns .btn { transition: .3s }
+
+/* ===== Events page ===== */
+.filters button:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(16, 27, 54, .12) }
+.filters button:active { transform: scale(.95) }
+.filters button.on { animation: pop .35s }
+
+.card { transition: transform .4s }
+.card:hover { transform: translateY(-8px) }
+.card-img { overflow: hidden; border-radius: 4px }
+.card-img img { transition: transform .7s }
+.card:hover .card-img img { transform: scale(1.08) }
+.date { transition: background .3s, color .3s }
+.card:hover .date { background: var(--ink); color: var(--gold) }
+.card h3 { transition: transform .3s }
+.card:hover h3 { transform: translateX(4px) }
+.card .go { transition: color .3s }
+.card .go::after { content: "\2192"; display: inline-block; margin-left: 6px; transition: transform .3s }
+.card:hover .go::after { transform: translateX(6px) }
+.meta span { transition: transform .3s }
+.card:hover .meta span { transform: scale(1.2) }
+
+.past-row { transition: padding-left .3s, background .3s }
+.past-row:hover { padding-left: 16px; background: rgba(255, 255, 255, .06) }
+.past-row b { display: inline-block; transition: transform .3s; transform-origin: left center }
+.past-row:hover b { transform: scale(1.1) }
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+    .js-anim .rv { opacity: 1 !important; animation: none !important }
+    .hero h1, .hero p.lead, .hero .hero-btns, .hero-media > img, .agenda,
+    .cta .btn, .why-img.in figcaption, .story-img.in figcaption, .crumb, .banner h1, .banner p, .js-anim .step.in .dot { animation: none !important }
+    .js-anim .steps::before { transform: none !important; animation: none !important }
+}
+
+
 </style>
 </head>
 <body>
@@ -242,6 +409,91 @@ btns.forEach(b=>b.addEventListener("click",()=>{
  show(b.dataset.f);
 }));
 show("all");
+
+(function () {
+    var root = document.documentElement;
+    if (!('IntersectionObserver' in window)) return;
+    root.classList.add('js-anim');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // [selector, variant class, base delay (s), stagger per item (s)]
+    var groups = [
+        ['.sh', 'rv-up', 0, 0],
+        ['.sp', 'rv-up', 0.1, 0],
+        ['.num', 'rv-up', 0, 0.12],
+        ['.svc-row', 'rv-right', 0, 0.1],
+        ['.ev', 'rv-right', 0, 0.12],
+        ['.why-img', 'rv-left', 0, 0],
+        ['.story-img', 'rv-left', 0, 0],
+        ['.story > div > p:last-child', 'rv-up', 0.3, 0],
+        ['.mvv-grid > div', 'rv-up', 0, 0.15],
+        ['.tl-row', 'rv-right', 0, 0.1],
+        ['.why-list li', 'rv-up', 0.1, 0.15],
+        ['.step', 'rv-up', 0, 0.15],
+        ['.q-main blockquote', 'rv-up', 0.1, 0],
+        ['.q-main .who', 'rv-up', 0.25, 0],
+        ['.q-side > div', 'rv-right', 0.1, 0.18],
+        ['.tm', 'rv-up', 0, 0.12],
+        ['.cta h2', 'rv-up', 0, 0],
+        ['.cta p', 'rv-up', 0.1, 0],
+        ['.cta .hero-btns', 'rv-up', 0.2, 0],
+        ['.cta-btns', 'rv-up', 0.2, 0],
+        ['.filters button', 'rv-pop', 0.1, 0.07],
+        ['.count', 'rv-up', 0.4, 0],
+        ['.card', 'rv-up', 0, 0.12, 3],
+        ['.past-row', 'rv-right', 0, 0.12],
+        ['.f-top', 'rv-up', 0, 0],
+        ['.f-grid > div', 'rv-up', 0, 0.1],
+        ['.f-bot', 'rv-up', 0.2, 0]
+    ];
+
+    function countUp(el) {
+        var m = el.textContent.trim().match(/^([\d,]+)(.*)$/);
+        if (!m || reduce) return;
+        var end = parseInt(m[1].replace(/,/g, ''), 10);
+        var suffix = m[2];
+        var comma = m[1].indexOf(',') > -1;
+        var dur = 1600, t0 = performance.now();
+        (function frame(t) {
+            var p = Math.min(1, (t - t0) / dur);
+            var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+            el.textContent = (comma ? v.toLocaleString('en-IN') : v) + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+        })(t0);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                e.target.classList.add('in');
+                if (e.target.classList.contains('num')) countUp(e.target.querySelector('h2'));
+                io.unobserve(e.target);
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        groups.forEach(function (g) {
+            document.querySelectorAll(g[0]).forEach(function (el, i) {
+                el.classList.add('rv', g[1]);
+                el.style.setProperty('--d', (g[2] + (g[4] ? i % g[4] : i) * g[3]).toFixed(2) + 's');
+                io.observe(el);
+            });
+        });
+
+        // Event filter: re-stagger the cards that are visible after a filter click
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#filters button')) return;
+            var n = 0;
+            document.querySelectorAll('.card:not([hidden])').forEach(function (c) {
+                c.style.setProperty('--d', (n++ * 0.08).toFixed(2) + 's');
+            });
+        });
+
+        // Process section: container only (draws the dashed line)
+        document.querySelectorAll('.steps').forEach(function (el) { io.observe(el); });
+    });
+})();
 
 
 </script>

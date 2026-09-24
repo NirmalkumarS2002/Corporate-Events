@@ -20,25 +20,53 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .wrap{max-width:1540px;margin:0 auto;padding-inline:clamp(20px,5vw,56px)}
 .sec{padding-block:clamp(60px,8vw,100px)}
-.btn{display:inline-block;padding:14px 26px;border-radius:4px;font-weight:700;font-size:15px;background:var(--gold);color:var(--ink);transition:.3s;cursor:pointer;border:2px solid var(--gold);font-family:inherit}
-.btn:hover{background:transparent;color:var(--gold)}
+.btn{display:inline-block;padding:14px 26px;border-radius:4px;font-weight:700;font-size:15px;background:var(--gold);color:var(--ink);transition:transform .3s ease,box-shadow .3s ease,background .3s ease,color .3s ease;cursor:pointer;border:2px solid var(--gold);font-family:inherit}
+.btn:hover{background:transparent;color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 20px -8px rgba(16,27,54,.35)}
+.btn:active{transform:translateY(-1px) scale(.98)}
 .btn.ghost{background:transparent;border-color:currentColor;color:#fff}
 .btn.ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
 .sh{font-size:clamp(30px,4.2vw,50px);max-width:640px;margin-bottom:14px}
 .sp{color:var(--slate);max-width:520px}
 
+/* ---- animation infrastructure ---- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes dash{to{background-position:-40px 0}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.reveal-scale{opacity:0;transform:scale(.94);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-scale.in-view{opacity:1;transform:scale(1)}
+.stagger>*{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.stagger.in-view>*{opacity:1;transform:translateY(0)}
+.stagger.in-view>*:nth-child(1){transition-delay:.05s}
+.stagger.in-view>*:nth-child(2){transition-delay:.13s}
+.stagger.in-view>*:nth-child(3){transition-delay:.21s}
+.stagger.in-view>*:nth-child(4){transition-delay:.29s}
+.stagger.in-view>*:nth-child(5){transition-delay:.37s}
+.stagger.in-view>*:nth-child(6){transition-delay:.45s}
+
+@media(prefers-reduced-motion:reduce){
+ .reveal,.reveal-scale,.stagger>*{opacity:1!important;transform:none!important;transition:none!important}
+ .banner h1,.banner p,.banner .crumb{animation:none!important}
+ *{scroll-behavior:auto!important}
+}
 
 /* 1 banner */
-.banner{background:var(--ink);color:#fff;padding-block:clamp(60px,9vw,110px)}
-.crumb{display:flex;gap:10px;font-size:14px;color:#aab3c8;margin-bottom:22px}
+.banner{background:var(--ink);color:#fff;padding-block:clamp(60px,9vw,110px);overflow:hidden}
+.crumb{display:flex;gap:10px;font-size:14px;color:#aab3c8;margin-bottom:22px;opacity:0;animation:fadeIn .6s ease .1s forwards}
 .crumb a:hover{color:var(--gold)}
-.banner h1{font-size:clamp(38px,6vw,72px);max-width:860px;letter-spacing:-.02em;margin-bottom:22px}
-.banner p{color:#c4cbdb;font-size:18px;max-width:560px}
+.banner h1{font-size:clamp(38px,6vw,72px);max-width:860px;letter-spacing:-.02em;margin-bottom:22px;opacity:0;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) .2s forwards}
+.banner p{color:#c4cbdb;font-size:18px;max-width:560px;opacity:0;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) .4s forwards}
 
 /* 2 services */
 .svc-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(30px,6vw,90px);margin-top:44px}
-.svc{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-block:28px;border-top:1px solid var(--line)}
-.svc>span{font-size:34px;color:var(--gold)}
+.svc{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-block:28px;border-top:1px solid var(--line);transition:transform .35s cubic-bezier(.2,.7,.2,1),padding-left .35s ease}
+.svc:hover{transform:translateX(6px)}
+.svc:hover>span{transform:scale(1.15) rotate(-6deg)}
+.svc>span{font-size:34px;color:var(--gold);display:inline-block;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
 .svc h3{font-size:23px;margin-bottom:6px}
 .svc p{font-size:15px;color:var(--slate);max-width:440px}
 @media(max-width:800px){.svc-grid{grid-template-columns:1fr}}
@@ -46,17 +74,28 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 /* 3 deep dive */
 .dive{background:var(--mist)}
 .dive-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
-.dive-img img{width:100%;height:520px;object-fit:cover;border-radius:90px 4px 4px 4px;background:#c9d0de}
+.dive-img img{width:100%;height:520px;object-fit:cover;border-radius:90px 4px 4px 4px;background:#c9d0de;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.dive-img{overflow:hidden;border-radius:90px 4px 4px 4px}
+.dive-img:hover img{transform:scale(1.05)}
 .checks{margin-top:26px;display:grid;gap:14px}
-.checks li{display:flex;gap:12px;font-size:15px}
+.checks li{display:flex;gap:12px;font-size:15px;opacity:0;transform:translateX(-16px);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.checks.in-view li{opacity:1;transform:translateX(0)}
+.checks.in-view li:nth-child(1){transition-delay:.05s}
+.checks.in-view li:nth-child(2){transition-delay:.12s}
+.checks.in-view li:nth-child(3){transition-delay:.19s}
+.checks.in-view li:nth-child(4){transition-delay:.26s}
+.checks.in-view li:nth-child(5){transition-delay:.33s}
+.checks.in-view li:nth-child(6){transition-delay:.40s}
 .checks span{color:var(--gold);font-size:22px}
 .dive .btn{margin-top:30px}
 @media(max-width:860px){.dive-grid{grid-template-columns:1fr}.dive-img img{height:320px}}
 
 /* 4 packages */
 .pk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;align-items:stretch}
-.pk{border:1px solid var(--line);border-radius:4px;padding:34px 30px;display:flex;flex-direction:column}
-.pk.hot{background:var(--ink);color:#fff;border-color:var(--ink);border-top:5px solid var(--gold)}
+.pk{border:1px solid var(--line);border-radius:4px;padding:34px 30px;display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease}
+.pk:hover{transform:translateY(-10px);box-shadow:0 24px 40px -20px rgba(16,27,54,.28)}
+.pk.hot{background:var(--ink);color:#fff;border-color:var(--ink);border-top:5px solid var(--gold);animation:floatY 5s ease-in-out infinite}
+.pk.hot:hover{animation-play-state:paused}
 .pk h3{font-size:26px;margin-bottom:6px}
 .pk .for{font-size:14px;color:var(--slate);margin-bottom:20px}
 .pk.hot .for{color:#aab3c8}
@@ -69,15 +108,17 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 .pk .btn{text-align:center}
 .pk:not(.hot) .btn{background:transparent;border-color:var(--ink);color:var(--ink)}
 .pk:not(.hot) .btn:hover{background:var(--ink);color:#fff}
-.flag{align-self:flex-start;background:var(--gold);color:var(--ink);font-size:12px;font-weight:700;padding:3px 12px;border-radius:30px;margin-bottom:14px}
+.flag{align-self:flex-start;background:var(--gold);color:var(--ink);font-size:12px;font-weight:700;padding:3px 12px;border-radius:30px;margin-bottom:14px;animation:scaleIn .5s cubic-bezier(.34,1.56,.64,1) .3s backwards}
 @media(max-width:940px){.pk-grid{grid-template-columns:1fr;max-width:520px}}
 
 /* 5 process */
 .proc{background:var(--ink);color:#fff}
 .proc .sp{color:#aab3c8}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:54px;position:relative}
-.steps::before{content:"";position:absolute;top:22px;left:0;right:0;border-top:2px dashed var(--gold)}
-.dot{position:relative;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-family:var(--serif);font-weight:700;margin-bottom:20px}
+.steps::before{content:"";position:absolute;top:22px;left:0;right:0;border-top:2px dashed var(--gold);background-size:40px 2px}
+.steps.in-view::before{animation:dash 1.2s linear infinite}
+.dot{position:relative;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-family:var(--serif);font-weight:700;margin-bottom:20px;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.step:hover .dot{transform:scale(1.15)}
 .step h3{font-size:21px;margin-bottom:8px}
 .step p{font-size:14px;color:#aab3c8}
 @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}.steps::before{display:none}}
@@ -85,13 +126,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 
 /* 6 faq */
 .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px)}
-.faq details{border-top:1px solid var(--line);padding-block:20px}
+.faq details{border-top:1px solid var(--line);padding-block:20px;transition:background .3s ease}
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;font-family:var(--serif);font-size:21px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";color:var(--gold);font-size:28px;line-height:1}
-.faq details[open] summary::after{content:"\2212"}
-.faq details p{margin-top:12px;color:var(--slate);font-size:15px;max-width:560px}
+.faq summary::after{content:"+";color:var(--gold);font-size:28px;line-height:1;display:inline-block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.faq details[open] summary::after{content:"+";transform:rotate(135deg)}
+.faq details p{margin-top:12px;color:var(--slate);font-size:15px;max-width:560px;animation:fadeUp .35s ease}
 @media(max-width:860px){.faq-grid{grid-template-columns:1fr}}
 
 /* 7 cta */
@@ -143,9 +184,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 <!-- 2. Services -->
 <section class="sec">
  <div class="wrap">
-  <h2 class="sh">Six ways we can help your business</h2>
-  <p class="sp">Choose one service or combine several into a single managed programme.</p>
-  <div class="svc-grid">
+  <h2 class="sh reveal">Six ways we can help your business</h2>
+  <p class="sp reveal">Choose one service or combine several into a single managed programme.</p>
+  <div class="svc-grid stagger">
    <div class="svc"><span class="material-symbols-outlined">groups</span><div><h3>Conferences and Summits</h3><p>Programme design, speaker management, registration and on-site delivery for 100 to 5,000 delegates.</p></div></div>
    <div class="svc"><span class="material-symbols-outlined">rocket_launch</span><div><h3>Product Launches</h3><p>Stagecraft, demo zones, press handling and live streaming for a launch that gets noticed.</p></div></div>
    <div class="svc"><span class="material-symbols-outlined">landscape</span><div><h3>Team Offsites</h3><p>Retreats with planned sessions, team activities, travel and stay for groups of any size.</p></div></div>
@@ -159,10 +200,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 <!-- 3. Deep dive -->
 <section class="sec dive">
  <div class="wrap dive-grid">
-  <div class="dive-img"><img src="./src/image_10.webp"  alt="Large conference with stage and audience"></div>
+  <div class="dive-img reveal-scale"><img src="./src/image_10.webp"  alt="Large conference with stage and audience"></div>
   <div>
-   <h2 class="sh">What is included in a conference we run</h2>
-   <p class="sp">One project lead manages the full scope, so you deal with one person, not ten vendors.</p>
+   <h2 class="sh reveal">What is included in a conference we run</h2>
+   <p class="sp reveal">One project lead manages the full scope, so you deal with one person, not ten vendors.</p>
    <ul class="checks">
     <li><span class="material-symbols-outlined">check_circle</span>Venue search, site visits and contract negotiation</li>
     <li><span class="material-symbols-outlined">check_circle</span>Speaker invitations, briefings and green-room care</li>
@@ -171,7 +212,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
     <li><span class="material-symbols-outlined">check_circle</span>Catering, guest travel and airport transfers</li>
     <li><span class="material-symbols-outlined">check_circle</span>Post-event report with attendance and feedback data</li>
    </ul>
-   <a href="404.html" class="btn">Discuss Your Conference</a>
+   <a href="404.html" class="btn reveal">Discuss Your Conference</a>
   </div>
  </div>
 </section>
@@ -179,9 +220,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 <!-- 4. Packages -->
 <section class="sec">
  <div class="wrap">
-  <h2 class="sh">Choose a package that fits your event</h2>
-  <p class="sp">Prices are starting points. Your proposal will list every cost line by line.</p>
-  <div class="pk-grid">
+  <h2 class="sh reveal">Choose a package that fits your event</h2>
+  <p class="sp reveal">Prices are starting points. Your proposal will list every cost line by line.</p>
+  <div class="pk-grid stagger">
    <div class="pk">
     <h3>Essential</h3><p class="for">Meetings and small offsites up to 100 guests</p>
     <div class="price">From ₹3.5 lakh<small>per event</small></div>
@@ -208,9 +249,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 <!-- 5. Process -->
 <section class="sec proc">
  <div class="wrap">
-  <h2 class="sh">How a project runs from brief to review</h2>
-  <p class="sp">The same four stages apply whether your event has 50 guests or 5,000.</p>
-  <div class="steps">
+  <h2 class="sh reveal">How a project runs from brief to review</h2>
+  <p class="sp reveal">The same four stages apply whether your event has 50 guests or 5,000.</p>
+  <div class="steps stagger">
    <div class="step"><div class="dot">1</div><h3>Brief</h3><p>One working session to agree goals, audience, budget and dates.</p></div>
    <div class="step"><div class="dot">2</div><h3>Plan</h3><p>You receive venue options, a programme outline and a costed proposal.</p></div>
    <div class="step"><div class="dot">3</div><h3>Produce</h3><p>We build, rehearse and run the event with a named on-site crew.</p></div>
@@ -223,10 +264,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 <section class="sec faq">
  <div class="wrap faq-grid">
   <div>
-   <h2 class="sh">Common questions about our services</h2>
-   <p class="sp">Need more detail? Send us a message and a project lead will reply within 48 hours.</p>
+   <h2 class="sh reveal">Common questions about our services</h2>
+   <p class="sp reveal">Need more detail? Send us a message and a project lead will reply within 48 hours.</p>
   </div>
-  <div>
+  <div class="reveal">
    <details open><summary>Can we hire you for just one part of an event?</summary><p>Yes. Many clients book only production, registration or travel. We quote each service separately.</p></details>
    <details><summary>Do you handle venue and vendor payments?</summary><p>We negotiate on your behalf and you approve each contract. Payments follow a schedule agreed in the proposal.</p></details>
    <details><summary>What happens if our plans change?</summary><p>Changes are common. We revise the schedule and budget together and confirm every update in writing.</p></details>
@@ -237,7 +278,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
 
 <!-- 7. CTA -->
 <section class="sec cta">
- <div class="wrap cta-in">
+ <div class="wrap cta-in reveal">
   <div>
    <h2>Ready to plan your next corporate event?</h2>
    <p>Share your date, headcount and goals. We will send a costed proposal within 48 hours.</p>
@@ -271,5 +312,24 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
  </div>
 </footer>
     <script src="script.js"></script>
+    <script>
+    // Scroll-reveal: fade/slide elements in as they enter the viewport
+    (function(){
+      var targets = document.querySelectorAll('.reveal, .reveal-scale, .stagger, .checks, .steps');
+      if(!('IntersectionObserver' in window)){
+        targets.forEach(function(el){ el.classList.add('in-view'); });
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+      targets.forEach(function(el){ io.observe(el); });
+    })();
+    </script>
 </body>
 </html>
