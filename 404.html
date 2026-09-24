@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found - Stackly Events</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#101b36;--gold:#d9a441;--mist:#edf0f5;--slate:#5b6478;--line:#d7dce6;--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+html,body{height:100%}
+body{background:var(--ink);color:var(--ink);font-family:var(--sans);line-height:1.5;display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden;
+background-image:radial-gradient(circle at 15% 20%,rgba(217,164,65,.14),transparent 40%),radial-gradient(circle at 85% 80%,rgba(255,255,255,.06),transparent 45%)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{padding:22px 28px}
+header img{width:130px;display:block}
+main{flex:1;display:grid;place-items:center;padding:20px 20px 50px}
+.ticket{display:flex;width:100%;max-width:820px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.stub{width:170px;flex-shrink:0;background:var(--gold);color:var(--ink);padding:26px 18px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;position:relative}
+.stub small{font-size:12px;font-weight:700}
+.stub .ic{font-size:54px;font-variation-settings:"FILL" 0,"wght" 300}
+.stub b{font-family:var(--serif);font-size:15px;line-height:1.2}
+.stub::after{content:"";position:absolute;right:-1px;top:0;bottom:0;border-right:3px dashed var(--ink);opacity:.35}
+.info{flex:1;padding:38px 40px}
+.tag{display:inline-block;background:rgba(217,164,65,.22);color:var(--warn,#b7791f);font-size:12px;font-weight:700;padding:4px 14px;border-radius:30px;margin-bottom:12px}
+.info h1{font-family:var(--serif);font-size:clamp(64px,11vw,104px);line-height:1;letter-spacing:-2px}
+.info h1 span{color:var(--gold)}
+.info h2{font-family:var(--serif);font-size:24px;margin:10px 0 8px}
+.info p{color:var(--slate);font-size:15px;max-width:440px}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border:2px solid var(--ink);border-radius:4px;font-family:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;transition:.25s}
+.btn.p{background:var(--ink);color:#fff}
+.btn.p:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.btn.s{background:none;color:var(--ink)}
+.btn.s:hover{background:var(--mist)}
+.btn span{font-size:18px}
+.help{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--slate)}
+.help a{color:var(--ink);font-weight:700;text-decoration-color:var(--gold);text-underline-offset:3px}
+footer{text-align:center;color:#8792ab;font-size:12px;padding:0 20px 22px}
+@media(max-width:640px){
+.ticket{flex-direction:column}
+.stub{width:100%;flex-direction:row;align-items:center;justify-content:center;gap:14px;padding:16px}
+.stub .ic{font-size:34px}
+.stub::after{display:none}
+.info{padding:28px 22px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header><a href="index.html"><img src="./src/logo.webp" alt="Stackly Events logo"></a></header>
+
+<main>
+  <div class="ticket">
+    <div class="stub">
+      <small>ADMIT ONE</small>
+      <span class="material-symbols-outlined ic">confirmation_number</span>
+      <b>Gate 404<br>Stackly Events</b>
+    </div>
+    <div class="info">
+      <span class="tag">Not on the programme</span>
+      <h1>4<span>0</span>4</h1>
+      <h2>This page has left the venue</h2>
+      <p>The page you are looking for has moved, or it is not available yet. Let us get you back to your events.</p>
+      <div class="acts">
+        <a class="btn p" href="login.html"><span class="material-symbols-outlined">dashboard</span>Back to Login</a>
+        <a class="btn s" href="index.html"><span class="material-symbols-outlined">home</span>Go to home</a>
+        <button class="btn s" id="back"><span class="material-symbols-outlined">arrow_back</span>Previous page</button>
+      </div>
+      <p class="help">Need a hand? Reach your event manager from <a href="client-dashboard.html">Messages</a>.</p>
+    </div>
+  </div>
+</main>
+
+<footer>&copy; <span id="yr"></span> Stackly Events. Corporate events, delivered.</footer>
+
+<script>
+document.getElementById("yr").textContent=new Date().getFullYear();
+document.getElementById("back").addEventListener("click",()=>{history.length>1?history.back():location.href="client-dashboard.html"});
+</script>
+</body>
+</html>

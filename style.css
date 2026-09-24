@@ -1,0 +1,268 @@
+ /* header */
+ .header {
+     position: sticky;
+     top: 0;
+     z-index: 10;
+     background: var(--ink);
+     color: #fff;
+     border-bottom: 1px solid rgba(255, 255, 255, .15)
+ }
+
+ .hbar {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     gap: 24px;
+     padding-block: 14px
+ }
+
+ .logo {
+     z-index: 99999;
+ }
+
+
+
+ .logo img {
+     width: clamp(120px, 13vw, 150px);
+
+ }
+
+ .menuwrap {
+     display: flex;
+     align-items: center;
+     gap: 36px
+ }
+
+ .menus {
+     display: flex;
+     gap: 30px
+ }
+
+ .menus a {
+     font-weight: 600;
+     font-size: 15px;
+     padding-block: 6px;
+     border-bottom: 2px solid transparent;
+     transition: .3s
+ }
+
+ .menus a:hover,
+ .menus a.active {
+     border-color: var(--gold)
+ }
+
+ .hcall {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     font-weight: 700;
+     font-size: 15px;
+     cursor: pointer;
+ }
+ .hcall:hover{
+    color: var(--gold);
+ }
+
+ .hcall span {
+     color: var(--gold)
+ }
+
+ .header .btn {
+     padding: 10px 30px;
+ }
+
+ .menubtn {
+     display: none;
+     background: var(--gold);
+     color: var(--ink);
+     border: 0;
+     padding: 6px;
+     border-radius: 4px;
+     cursor: pointer
+ }
+
+ .btnwrap {
+     display: none;
+ }
+
+ @media(max-width:980px) {
+
+      body.menu-open {
+    overflow: hidden;
+        height: 100vh;
+}
+
+     .btnwrap {
+         display: flex;
+         align-items: center;
+         gap: 10px;
+     }
+
+     .btnwrap a {
+         display: flex;
+         align-items: center;
+     }
+
+     .menubtn {
+         display: flex;
+     }
+
+     .menubtn span {
+         font-size: 20px;
+     }
+
+     .menuwrap {
+         position: fixed;
+         top: 0;
+         left: 0;
+         height: 100vh;
+         width: min(320px, 85vw);
+         background: #fff;
+         color: var(--ink);
+         flex-direction: column;
+         align-items: flex-start;
+         padding: 90px 28px;
+         gap: 26px;
+         transform: translateX(-100%);
+         transition: .4s;
+         box-shadow: 8px 0 30px rgba(0, 0, 0, .15)
+     }
+
+     .menuwrap.active {
+         transform: none
+     }
+
+     .menus {
+         flex-direction: column;
+         gap: 18px
+     }
+
+     .hbar .btn.hb {
+         display: none
+     }
+
+     .menubtn {
+         z-index: 11
+     }
+ }
+
+
+ /* footer */
+ .footer {
+     background: var(--ink);
+     color: #c4cbdb
+ }
+
+ .f-top img {
+     width: 160px
+ }
+
+ .f-top {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 24px;
+     flex-wrap: wrap;
+     padding-block: 44px;
+     border-bottom: 1px solid rgba(255, 255, 255, .18)
+ }
+
+ .subform {
+     display: flex
+ }
+
+ .subform input {
+     padding: 14px 18px;
+     max-width: max(clamp(190px,21vw,260px), 60vw);
+     border: 0;
+     border-radius: 4px 0 0 4px;
+     font: inherit
+ }
+ .subform input:focus{
+    outline: none;
+    
+ }
+
+ .subform button {
+     padding: 14px 22px;
+     border: 0;
+     background: var(--gold);
+     color: var(--ink);
+     font-weight: 700;
+     border-radius: 0 4px 4px 0;
+     cursor: pointer;
+     font-family: inherit
+ }
+
+ .frmerr {
+     color: #ff8a8a;
+     font-size: 14px;
+     margin-top: 8px;
+     min-height: 20px
+ }
+
+ .f-grid {
+     display: grid;
+     grid-template-columns: 1.4fr 1fr 1fr 1.2fr 1.2fr;
+     gap: 30px;
+     padding-block: 50px
+ }
+
+ .f-grid h4 {
+     color: #fff;
+     font-family: var(--serif);
+     font-size: 19px;
+     margin-bottom: 16px
+ }
+
+ .f-grid p,
+ .f-grid a {
+     display: block;
+     font-size: 14px;
+     margin-bottom: 9px
+ }
+
+ .f-grid a:hover {
+     color: var(--gold)
+ }
+
+ .f-soc {
+     display: flex;
+     gap: 10px;
+     margin-top: 14px
+ }
+
+ .f-soc a {
+     width: 38px;
+     height: 38px;
+     border: 1px solid rgba(255, 255, 255, .35);
+     border-radius: 4px;
+     display: grid;
+     place-items: center;
+     margin: 0
+ }
+
+ .f-bot {
+     border-top: 1px solid rgba(255, 255, 255, .18);
+     text-align: center;
+     padding-block: 24px;
+     font-size: 13px
+ }
+
+ @media(max-width:980px) {
+     .f-grid {
+         grid-template-columns: 1fr 1fr 1fr
+     }
+ }
+
+ @media(max-width:600px) {
+     .f-grid {
+         grid-template-columns: 1fr 1fr
+     }
+ }
+
+ @media(max-width:420px) {
+     .f-grid {
+         grid-template-columns: 1fr
+     }
+ }

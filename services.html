@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Events - Our Services</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#101b36;--gold:#d9a441;--mist:#edf0f5;--slate:#5b6478;--line:#d7dce6;--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--sans);color:var(--ink);background:#fff;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1540px;margin:0 auto;padding-inline:clamp(20px,5vw,56px)}
+.sec{padding-block:clamp(60px,8vw,100px)}
+.btn{display:inline-block;padding:14px 26px;border-radius:4px;font-weight:700;font-size:15px;background:var(--gold);color:var(--ink);transition:.3s;cursor:pointer;border:2px solid var(--gold);font-family:inherit}
+.btn:hover{background:transparent;color:var(--gold)}
+.btn.ghost{background:transparent;border-color:currentColor;color:#fff}
+.btn.ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
+.sh{font-size:clamp(30px,4.2vw,50px);max-width:640px;margin-bottom:14px}
+.sp{color:var(--slate);max-width:520px}
+
+
+/* 1 banner */
+.banner{background:var(--ink);color:#fff;padding-block:clamp(60px,9vw,110px)}
+.crumb{display:flex;gap:10px;font-size:14px;color:#aab3c8;margin-bottom:22px}
+.crumb a:hover{color:var(--gold)}
+.banner h1{font-size:clamp(38px,6vw,72px);max-width:860px;letter-spacing:-.02em;margin-bottom:22px}
+.banner p{color:#c4cbdb;font-size:18px;max-width:560px}
+
+/* 2 services */
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(30px,6vw,90px);margin-top:44px}
+.svc{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-block:28px;border-top:1px solid var(--line)}
+.svc>span{font-size:34px;color:var(--gold)}
+.svc h3{font-size:23px;margin-bottom:6px}
+.svc p{font-size:15px;color:var(--slate);max-width:440px}
+@media(max-width:800px){.svc-grid{grid-template-columns:1fr}}
+
+/* 3 deep dive */
+.dive{background:var(--mist)}
+.dive-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
+.dive-img img{width:100%;height:520px;object-fit:cover;border-radius:90px 4px 4px 4px;background:#c9d0de}
+.checks{margin-top:26px;display:grid;gap:14px}
+.checks li{display:flex;gap:12px;font-size:15px}
+.checks span{color:var(--gold);font-size:22px}
+.dive .btn{margin-top:30px}
+@media(max-width:860px){.dive-grid{grid-template-columns:1fr}.dive-img img{height:320px}}
+
+/* 4 packages */
+.pk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px;align-items:stretch}
+.pk{border:1px solid var(--line);border-radius:4px;padding:34px 30px;display:flex;flex-direction:column}
+.pk.hot{background:var(--ink);color:#fff;border-color:var(--ink);border-top:5px solid var(--gold)}
+.pk h3{font-size:26px;margin-bottom:6px}
+.pk .for{font-size:14px;color:var(--slate);margin-bottom:20px}
+.pk.hot .for{color:#aab3c8}
+.price{font-family:var(--serif);font-size:34px;font-weight:700;margin-bottom:4px}
+.price small{display:block;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--slate)}
+.pk.hot .price small{color:#aab3c8}
+.pk ul{margin:22px 0 28px;display:grid;gap:10px;flex:1}
+.pk li{display:flex;gap:10px;font-size:14px}
+.pk li span{color:var(--gold);font-size:20px}
+.pk .btn{text-align:center}
+.pk:not(.hot) .btn{background:transparent;border-color:var(--ink);color:var(--ink)}
+.pk:not(.hot) .btn:hover{background:var(--ink);color:#fff}
+.flag{align-self:flex-start;background:var(--gold);color:var(--ink);font-size:12px;font-weight:700;padding:3px 12px;border-radius:30px;margin-bottom:14px}
+@media(max-width:940px){.pk-grid{grid-template-columns:1fr;max-width:520px}}
+
+/* 5 process */
+.proc{background:var(--ink);color:#fff}
+.proc .sp{color:#aab3c8}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:54px;position:relative}
+.steps::before{content:"";position:absolute;top:22px;left:0;right:0;border-top:2px dashed var(--gold)}
+.dot{position:relative;width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-family:var(--serif);font-weight:700;margin-bottom:20px}
+.step h3{font-size:21px;margin-bottom:8px}
+.step p{font-size:14px;color:#aab3c8}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}.steps::before{display:none}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* 6 faq */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px)}
+.faq details{border-top:1px solid var(--line);padding-block:20px}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-family:var(--serif);font-size:21px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:28px;line-height:1}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{margin-top:12px;color:var(--slate);font-size:15px;max-width:560px}
+@media(max-width:860px){.faq-grid{grid-template-columns:1fr}}
+
+/* 7 cta */
+.cta{background:var(--gold)}
+.cta-in{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.cta h2{font-size:clamp(30px,4vw,48px);max-width:640px;margin-bottom:10px}
+.cta p{max-width:520px}
+.cta-btns{display:flex;gap:14px;flex-wrap:wrap}
+.cta .btn{background:var(--ink);border-color:var(--ink);color:#fff}
+.cta .btn:hover{background:transparent;color:var(--ink)}
+.cta .btn.ghost{background:transparent;color:var(--ink)}
+.cta .btn.ghost:hover{background:var(--ink);color:#fff}
+
+</style>
+</head>
+<body>
+
+<header class="header">
+ <div class="wrap hbar">
+  <a href="index.html" class="logo"><img src="./src/logo.webp" alt="Company logo"></a>
+  <div class="menuwrap">
+   <ul class="menus">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pages.html">Events</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="contact.html">Contact</a></li>
+   </ul>
+   <div class="hcall errorpage"><span class="material-symbols-outlined">call</span>+91 12345 67890</div>
+  </div>
+  <a href="login.html" class="btn hb">Login</a>
+    <div class="btnwrap">
+                 <a href="login.html" class="logicon"><span class="material-symbols-outlined">person</span></a>
+           
+            <button class="menubtn" aria-label="Toggle menu"><span
+                    class="material-symbols-outlined menuspan">menu</span></button>
+            </div> </div>
+</header>
+
+<!-- 1. Banner -->
+<section class="banner">
+ <div class="wrap">
+  <div class="crumb"><a href="index.html">Home</a><span>/</span><span>Services</span></div>
+  <h1>Everything your event needs, delivered by one team.</h1>
+  <p>From the first venue visit to the last guest leaving, we plan, produce and run corporate events end to end.</p>
+ </div>
+</section>
+
+<!-- 2. Services -->
+<section class="sec">
+ <div class="wrap">
+  <h2 class="sh">Six ways we can help your business</h2>
+  <p class="sp">Choose one service or combine several into a single managed programme.</p>
+  <div class="svc-grid">
+   <div class="svc"><span class="material-symbols-outlined">groups</span><div><h3>Conferences and Summits</h3><p>Programme design, speaker management, registration and on-site delivery for 100 to 5,000 delegates.</p></div></div>
+   <div class="svc"><span class="material-symbols-outlined">rocket_launch</span><div><h3>Product Launches</h3><p>Stagecraft, demo zones, press handling and live streaming for a launch that gets noticed.</p></div></div>
+   <div class="svc"><span class="material-symbols-outlined">landscape</span><div><h3>Team Offsites</h3><p>Retreats with planned sessions, team activities, travel and stay for groups of any size.</p></div></div>
+   <div class="svc"><span class="material-symbols-outlined">emoji_events</span><div><h3>Award Nights and Galas</h3><p>Formal evenings with staging, catering and entertainment that fit your company culture.</p></div></div>
+   <div class="svc"><span class="material-symbols-outlined">storefront</span><div><h3>Exhibitions and Trade Shows</h3><p>Stand design, floor plans, logistics and lead capture so your booth brings in business.</p></div></div>
+   <div class="svc"><span class="material-symbols-outlined">connected_tv</span><div><h3>Hybrid and Virtual Events</h3><p>Broadcast crew, streaming platform and virtual attendee tools for teams across cities.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- 3. Deep dive -->
+<section class="sec dive">
+ <div class="wrap dive-grid">
+  <div class="dive-img"><img src="./src/image_10.webp"  alt="Large conference with stage and audience"></div>
+  <div>
+   <h2 class="sh">What is included in a conference we run</h2>
+   <p class="sp">One project lead manages the full scope, so you deal with one person, not ten vendors.</p>
+   <ul class="checks">
+    <li><span class="material-symbols-outlined">check_circle</span>Venue search, site visits and contract negotiation</li>
+    <li><span class="material-symbols-outlined">check_circle</span>Speaker invitations, briefings and green-room care</li>
+    <li><span class="material-symbols-outlined">check_circle</span>Online registration, badges and check-in desks</li>
+    <li><span class="material-symbols-outlined">check_circle</span>Stage, sound, lighting and screens with a rehearsal day</li>
+    <li><span class="material-symbols-outlined">check_circle</span>Catering, guest travel and airport transfers</li>
+    <li><span class="material-symbols-outlined">check_circle</span>Post-event report with attendance and feedback data</li>
+   </ul>
+   <a href="404.html" class="btn">Discuss Your Conference</a>
+  </div>
+ </div>
+</section>
+
+<!-- 4. Packages -->
+<section class="sec">
+ <div class="wrap">
+  <h2 class="sh">Choose a package that fits your event</h2>
+  <p class="sp">Prices are starting points. Your proposal will list every cost line by line.</p>
+  <div class="pk-grid">
+   <div class="pk">
+    <h3>Essential</h3><p class="for">Meetings and small offsites up to 100 guests</p>
+    <div class="price">From ₹3.5 lakh<small>per event</small></div>
+    <ul><li><span class="material-symbols-outlined">check</span>Venue sourcing</li><li><span class="material-symbols-outlined">check</span>Basic AV and stage</li><li><span class="material-symbols-outlined">check</span>Catering coordination</li><li><span class="material-symbols-outlined">check</span>Day-of event manager</li></ul>
+    <a href="404.html" class="btn">Get a Quote</a>
+   </div>
+   <div class="pk hot">
+    <span class="flag">Most booked</span>
+    <h3>Professional</h3><p class="for">Conferences and launches up to 500 guests</p>
+    <div class="price">From ₹9 lakh<small>per event</small></div>
+    <ul><li><span class="material-symbols-outlined">check</span>Everything in Essential</li><li><span class="material-symbols-outlined">check</span>Custom stage and branding</li><li><span class="material-symbols-outlined">check</span>Registration and badges</li><li><span class="material-symbols-outlined">check</span>Live streaming crew</li><li><span class="material-symbols-outlined">check</span>Post-event report</li></ul>
+    <a href="404.html" class="btn">Get a Quote</a>
+   </div>
+   <div class="pk">
+    <h3>Enterprise</h3><p class="for">Multi-day summits and national roadshows</p>
+    <div class="price">Custom quote<small>based on scope</small></div>
+    <ul><li><span class="material-symbols-outlined">check</span>Everything in Professional</li><li><span class="material-symbols-outlined">check</span>Dedicated project team</li><li><span class="material-symbols-outlined">check</span>Multi-city logistics</li><li><span class="material-symbols-outlined">check</span>Sponsor and exhibitor management</li></ul>
+    <a href="404.html" class="btn">Talk to Us</a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 5. Process -->
+<section class="sec proc">
+ <div class="wrap">
+  <h2 class="sh">How a project runs from brief to review</h2>
+  <p class="sp">The same four stages apply whether your event has 50 guests or 5,000.</p>
+  <div class="steps">
+   <div class="step"><div class="dot">1</div><h3>Brief</h3><p>One working session to agree goals, audience, budget and dates.</p></div>
+   <div class="step"><div class="dot">2</div><h3>Plan</h3><p>You receive venue options, a programme outline and a costed proposal.</p></div>
+   <div class="step"><div class="dot">3</div><h3>Produce</h3><p>We build, rehearse and run the event with a named on-site crew.</p></div>
+   <div class="step"><div class="dot">4</div><h3>Review</h3><p>A report covers attendance, feedback and ideas for your next event.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 6. FAQ -->
+<section class="sec faq">
+ <div class="wrap faq-grid">
+  <div>
+   <h2 class="sh">Common questions about our services</h2>
+   <p class="sp">Need more detail? Send us a message and a project lead will reply within 48 hours.</p>
+  </div>
+  <div>
+   <details open><summary>Can we hire you for just one part of an event?</summary><p>Yes. Many clients book only production, registration or travel. We quote each service separately.</p></details>
+   <details><summary>Do you handle venue and vendor payments?</summary><p>We negotiate on your behalf and you approve each contract. Payments follow a schedule agreed in the proposal.</p></details>
+   <details><summary>What happens if our plans change?</summary><p>Changes are common. We revise the schedule and budget together and confirm every update in writing.</p></details>
+   <details><summary>Do you provide a backup plan?</summary><p>Every event has a risk plan covering weather, power, speaker delays and vendor no-shows.</p></details>
+  </div>
+ </div>
+</section>
+
+<!-- 7. CTA -->
+<section class="sec cta">
+ <div class="wrap cta-in">
+  <div>
+   <h2>Ready to plan your next corporate event?</h2>
+   <p>Share your date, headcount and goals. We will send a costed proposal within 48 hours.</p>
+  </div>
+  <div class="cta-btns">
+   <a href="404.html" class="btn">Book a Consultation</a>
+   <a href="404.html" class="btn ghost">See Upcoming Events</a>
+  </div>
+ </div>
+</section>
+
+<footer class="footer">
+ <div class="wrap">
+  <div class="f-top">
+   <a href="index.html"><img src="./src/logo.webp" alt="Company logo"></a>
+   <div>
+    <div class="subform"><input type="email" placeholder="Work email for event updates" id="subemail" aria-label="Email"><button class="subscribe-btn">Subscribe</button></div>
+    <p class="frmerr"></p>
+   </div>
+  </div>
+  <div class="f-grid">
+   <div><h4>About Us</h4><p>We design and deliver corporate events built on planning, calm delivery and clear budgets.</p><p>Since 2011</p></div>
+   <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="about.html">About</a><a href="pages.html">Events</a><a href="services.html">Services</a><a href="contact.html">Contact</a></div>
+   <div><h4>Company</h4><a href="404.html">Pricing</a><a href="404.html">Team</a><a href="404.html">Careers</a><a href="404.html">Terms and conditions</a><a href="404.html">Privacy policy</a></div>
+   <div><h4>Office</h4><p>123, Anna Nagar<br>Chennai, Tamil Nadu</p><a href="404.html">hello@gmail.com</a><a href="404.html">careers@gmail.com</a></div>
+   <div><h4>Call Us</h4><a href="404.html">+91 12345 67890</a><a href="404.html">+91 09876 54321</a>
+    <div class="f-soc"><a href="404.html" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a><a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a><a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="404.html" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a></div>
+   </div>
+  </div>
+  <div class="f-bot">© 2026 All Rights Reserved by Stackly</div>
+ </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>

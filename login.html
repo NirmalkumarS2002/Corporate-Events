@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Events - Login</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --ink: #101b36;
+            --gold: #d9a441;
+            --mist: #edf0f5;
+            --slate: #5b6478;
+            --line: #d7dce6;
+            --bad: #c0392b;
+            --serif: "Fraunces", Georgia, serif;
+            --sans: "Manrope", system-ui, sans-serif
+        }
+
+        html {
+            overflow-x: hidden
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--ink);
+            background: #fff;
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--serif);
+            font-weight: 600;
+            line-height: 1.1
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 3px
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh
+        }
+
+        /* left panel */
+        .side {
+            position: relative;
+            color: #fff;
+            padding: clamp(28px, 4vw, 56px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 40px;
+            background: linear-gradient(180deg, rgba(16, 27, 54, .9), rgba(16, 27, 54, .96)), url("./src/img9.webp") center/cover #101b36
+        }
+
+        .side .logo img {
+            width: 160px
+        }
+
+        .side h1 {
+            font-size: clamp(34px, 4vw, 54px);
+            letter-spacing: -.02em;
+            margin-bottom: 26px;
+            max-width: 520px
+        }
+
+        .perks {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 36px
+        }
+
+        .perks li {
+            display: flex;
+            gap: 14px;
+            list-style: none;
+            color: #c4cbdb;
+            font-size: 15px
+        }
+
+        .perks span {
+            color: var(--gold);
+            font-size: 24px
+        }
+
+        .ticket {
+            background: #fff;
+            color: var(--ink);
+            border-radius: 4px;
+            border-top: 5px solid var(--gold);
+            padding: 20px 24px;
+            max-width: 400px;
+            display: flex;
+            gap: 20px;
+            align-items: center
+        }
+
+        .ticket .d {
+            font-family: var(--serif);
+            font-size: 42px;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center
+        }
+
+        .ticket .d small {
+            display: block;
+            font-family: var(--sans);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 4px
+        }
+
+        .ticket h3 {
+            font-size: 19px;
+            margin-bottom: 2px
+        }
+
+        .ticket p {
+            font-size: 13px;
+            color: var(--slate)
+        }
+
+        .side .note {
+            font-size: 13px;
+            color: #aab3c8
+        }
+
+        /* right panel */
+        .main {
+            display: flex;
+            flex-direction: column;
+            padding: clamp(24px, 4vw, 48px)
+        }
+
+        .back {
+            align-self: flex-end;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: .3s
+        }
+
+        .back:hover {
+            border-color: var(--gold)
+        }
+
+        .back span {
+            font-size: 18px
+        }
+
+        .form-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-block: 30px
+        }
+
+        .form {
+            width: 100%;
+            max-width: 420px
+        }
+
+        .form h2 {
+            font-size: clamp(30px, 3.4vw, 40px);
+            margin-bottom: 8px
+        }
+
+        .form .sub {
+            color: var(--slate);
+            font-size: 15px;
+            margin-bottom: 28px
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--ink);
+            border-radius: 4px;
+            margin-bottom: 26px;
+            overflow: hidden
+        }
+
+        .tabs button {
+            font: inherit;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px;
+            border: 0;
+            background: transparent;
+            color: var(--ink);
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .tabs button+button {
+            border-left: 1px solid var(--ink)
+        }
+
+        .tabs button.on {
+            background: var(--ink);
+            color: #fff
+        }
+
+        .fld {
+            margin-bottom: 18px
+        }
+
+        .fld label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            padding: 0 14px;
+            background: var(--mist);
+            transition: .2s
+        }
+
+        .box:focus-within {
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(217, 164, 65, .25)
+        }
+
+        .box.bad {
+            border-color: var(--bad)
+        }
+
+        .box>span {
+            font-size: 20px;
+            color: var(--slate)
+        }
+
+        .box input {
+            flex: 1;
+            min-width: 0;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            font: inherit;
+            font-size: 15px;
+            padding: 14px 0;
+            color: var(--ink)
+        }
+
+        .eye {
+            cursor: pointer;
+            background: none;
+            border: 0;
+            display: grid;
+            place-items: center;
+            color: var(--slate)
+        }
+
+        .err {
+            color: var(--bad);
+            font-size: 13px;
+            margin-top: 5px;
+            min-height: 0
+        }
+
+        .opts {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            font-size: 14px
+        }
+
+        .opts label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--slate)
+        }
+
+        .opts input {
+            accent-color: var(--gold);
+            width: 16px;
+            height: 16px
+        }
+
+        .opts a {
+            font-weight: 700;
+            border-bottom: 2px solid var(--gold)
+        }
+
+        .opts a:hover {
+            color: var(--slate)
+        }
+
+        .go {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px;
+            background: var(--gold);
+            color: var(--ink);
+            border: 2px solid var(--gold);
+            border-radius: 4px;
+            font: inherit;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .go:hover {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff
+        }
+
+        .or {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0 18px;
+            font-size: 13px;
+            color: var(--slate)
+        }
+
+        .or::before,
+        .or::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line)
+        }
+
+        .soc {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 26px
+        }
+
+        .soc a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            font-size: 18px;
+            transition: .3s
+        }
+
+        .soc a:hover {
+            border-color: var(--ink);
+            background: var(--mist)
+        }
+
+        .foot {
+            text-align: center;
+            font-size: 14px;
+            color: var(--slate)
+        }
+
+        .foot a {
+            color: var(--ink);
+            font-weight: 700;
+            border-bottom: 2px solid var(--gold)
+        }
+
+
+        @media(max-width:900px) {
+            .split {
+                grid-template-columns: 1fr
+            }
+
+            .side {
+                min-height: 0;
+                padding-bottom: 36px
+            }
+
+            .ticket,
+            .note,
+            .perks {
+                display: none
+            }
+
+            .side h1 {
+                margin-bottom: 0;
+                font-size: 32px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="split">
+        <aside class="side">
+            <a href="index.html" class="logo"><img src="./src/logo.webp" alt="Company logo"></a>
+            <div>
+                <h1>Run every event from one dashboard.</h1>
+                <ul class="perks">
+                    <li><span class="material-symbols-outlined">how_to_reg</span>Track registrations and attendee lists
+                        in real time</li>
+                    <li><span class="material-symbols-outlined">request_quote</span>Review proposals and approve budgets
+                        online</li>
+                    <li><span class="material-symbols-outlined">assessment</span>Download post-event reports and
+                        feedback data</li>
+                </ul>
+                <div class="ticket">
+                    <div class="d">14<small>NOV</small></div>
+                    <div>
+                        <h3>Global Leadership Summit</h3>
+                        <p>Chennai Trade Centre, 800 delegates</p>
+                    </div>
+                </div>
+            </div>
+            <p class="note">Need help signing in? Call +91 12345 67890</p>
+        </aside>
+
+        <main class="main">
+            <a href="index.html" class="back"><span class="material-symbols-outlined">arrow_back</span>Back to home</a>
+            <div class="form-wrap">
+                <div class="form">
+                    <h2>Log in to your account</h2>
+                    <p class="sub">Manage your events, proposals and team access.</p>
+
+                    <div class="tabs" role="group" aria-label="Login as">
+                        <button type="button" class="on" data-role="Admin">Admin</button>
+                        <button type="button" data-role="Client">Client</button>
+                    </div>
+
+                    <div class="fld">
+                        <label for="log-email">Work email</label>
+                        <div class="box"><span class="material-symbols-outlined">mail</span><input type="email"
+                                id="log-email" placeholder="you@company.com" autocomplete="email"></div>
+                        <p class="err" role="alert"></p>
+                    </div>
+
+                    <div class="fld">
+                        <label for="log-pass">Password</label>
+                        <div class="box"><span class="material-symbols-outlined">lock</span><input type="password"
+                                id="log-pass" placeholder="Enter your password" autocomplete="current-password"><button
+                                type="button" class="eye" aria-label="Show password"><span
+                                    class="material-symbols-outlined">visibility_off</span></button></div>
+                        <p class="err" role="alert"></p>
+                    </div>
+
+                    <div class="opts">
+                        <label><input type="checkbox"> Remember me</label>
+                        <a href="404.html">Forgot password?</a>
+                    </div>
+
+                    <button class="go" id="loginBtn">Log in<span
+                            class="material-symbols-outlined">arrow_forward</span></button>
+
+                    <div class="or">or continue with</div>
+                    <div class="soc">
+                        <a href="404.html" aria-label="Google"><i class="fa-brands fa-google"></i></a>
+                        <a href="404.html" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="404.html" aria-label="Microsoft"><i class="fa-brands fa-microsoft"></i></a>
+                    </div>
+
+                    <p class="foot">New to our platform? <a href="sign.html">Create an account</a></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const email = document.querySelector("#log-email"), password = document.querySelector("#log-pass");
+        const loginBtn = document.querySelector("#loginBtn"), tabs = document.querySelectorAll(".tabs button");
+        const eye = document.querySelector(".eye"), eyeIcon = eye.querySelector("span");
+        const errs = document.querySelectorAll(".err"), popup = document.querySelector("#popup"), okBtn = document.querySelector("#okBtn");
+        let selectedRole = "Admin";
+
+        tabs.forEach(t => t.addEventListener("click", () => {
+            tabs.forEach(x => x.classList.remove("on"));
+            t.classList.add("on");
+            selectedRole = t.dataset.role;
+        }));
+
+        eye.addEventListener("click", () => {
+            const hidden = password.type === "password";
+            password.type = hidden ? "text" : "password";
+            eyeIcon.textContent = hidden ? "visibility" : "visibility_off";
+            eye.setAttribute("aria-label", hidden ? "Hide password" : "Show password");
+        });
+
+        function setErr(i, msg) {
+            errs[i].textContent = msg;
+            errs[i].previousElementSibling.classList.toggle("bad", !!msg);
+        }
+
+        loginBtn.addEventListener("click", () => {
+            const em = email.value.trim(), pw = password.value;
+            let ok = true;
+            setErr(0, ""); setErr(1, "");
+
+            if (em === "") { setErr(0, "Enter your work email"); ok = false }
+            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { setErr(0, "Enter a valid email address"); ok = false }
+
+            if (pw.trim() === "") { setErr(1, "Enter your password"); ok = false }
+            else if (pw.length < 6) { setErr(1, "Password must be at least 6 characters"); ok = false }
+
+            if (ok) {
+                try { localStorage.setItem("useremail", em) } catch (e) { }
+
+                email.value = ""
+                password.value = ""
+                window.location.href = selectedRole === "Admin" ? "admin.html" : "client.html";
+
+            }
+        });
+
+
+
+        [email, password].forEach(el => el.addEventListener("keydown", e => { if (e.key === "Enter") loginBtn.click() }));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stackly Events - Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,-50..200"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --ink: #101b36;
+        --gold: #d9a441;
+        --mist: #edf0f5;
+        --slate: #5b6478;
+        --line: #d7dce6;
+        --good: #1e8a55;
+        --warn: #b7791f;
+        --bad: #c0392b;
+        --serif: "Fraunces", Georgia, serif;
+        --sans: "Manrope", system-ui, sans-serif;
+      }
+      body {
+        display: flex;
+        background: var(--mist);
+        font-family: var(--sans);
+        color: var(--ink);
+        min-height: 100vh;
+        overflow-x: hidden;
+        line-height: 1.5;
+      }
+      button {
+        font-family: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 2px;
+      }
+
+      /* sidebar */
+      .sb {
+        width: 250px;
+        flex-shrink: 0;
+        background: var(--ink);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        transition: width 0.3s;
+      }
+      .sb.min {
+        width: 76px;
+      }
+      .sb.min .lbl,
+      .sb.min .grp,
+      .sb.min .cnt,
+      .sb.min .who,
+      .sb.min .sb-logo img {
+        display: none;
+      }
+      .sb.min .nav button,
+      .sb.min .sb-foot {
+        justify-content: center;
+      }
+      .sb-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 20px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .sb-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sb-logo img {
+        width: 130px;
+      }
+      .rail,
+      .sclose {
+        background: rgba(255, 255, 255, 0.1);
+        border: 0;
+        color: #c4cbdb;
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+      }
+      .rail:hover {
+        color: var(--gold);
+      }
+      .sclose {
+        display: none;
+      }
+      .sb-scroll {
+        flex: 1;
+        overflow-y: auto;
+        padding: 18px 12px;
+      }
+      .grp {
+        font-size: 12px;
+        font-weight: 700;
+        color: #8792ab;
+        padding: 0 10px;
+        margin: 20px 0 8px;
+      }
+      .grp:first-child {
+        margin-top: 0;
+      }
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .nav button {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 11px 12px;
+        border: 0;
+        border-left: 3px solid transparent;
+        background: none;
+        color: #b6bed1;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: left;
+        transition: 0.25s;
+      }
+      .nav button span.material-symbols-outlined {
+        font-size: 20px;
+      }
+      .nav button:hover {
+        color: #fff;
+        border-left-color: rgba(255, 255, 255, 0.3);
+      }
+      .nav button.on {
+        color: var(--gold);
+        border-left-color: var(--gold);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .cnt {
+        margin-left: auto;
+        font-size: 11px;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 1px 8px;
+        border-radius: 20px;
+      }
+      .nav button.on .cnt {
+        background: var(--gold);
+        color: var(--ink);
+      }
+      .sb-foot {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .sb-foot img,
+      .avatar img {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .sb-foot h4 {
+        font-size: 14px;
+      }
+      .sb-foot small {
+        color: #8792ab;
+        font-size: 12px;
+      }
+
+      /* main */
+      .main {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .top {
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        padding: 14px 28px;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .top1,
+      .top2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .crumb {
+        font-size: 13px;
+        color: var(--slate);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+      }
+      .crumb b {
+        color: var(--gold);
+      }
+      .date {
+        font-size: 13px;
+        color: var(--slate);
+        font-weight: 600;
+      }
+      .top h2 {
+        font-family: var(--serif);
+        font-size: 27px;
+      }
+      .tr {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .ibtn {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--line);
+        background: var(--mist);
+        border-radius: 4px;
+        display: grid;
+        place-items: center;
+        color: var(--slate);
+        cursor: pointer;
+      }
+      .ibtn span {
+        font-size: 20px;
+      }
+      .ibtn i {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      .mob {
+        display: none;
+        align-items: center;
+        gap: 12px;
+      }
+      .mob > span {
+        cursor: pointer;
+        font-size: 26px;
+      }
+      .mob a {
+        padding: 6px 10px;
+        border-radius: 4px;
+        display: flex;
+      }
+      .mob img {
+        width: 96px;
+      }
+      .body {
+        padding: 24px 28px 44px;
+      }
+      .view {
+        display: none;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .view.on {
+        display: flex;
+      }
+
+      /* shared */
+      .panel {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 22px;
+        overflow-x: auto;
+      }
+      .panel h3 {
+        font-family: var(--serif);
+        font-size: 19px;
+        margin-bottom: 16px;
+      }
+      .ph {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .ph h3 {
+        margin: 0;
+      }
+      .btn {
+        padding: 10px 20px;
+        background: var(--ink);
+        border: 2px solid var(--ink);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.25s;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--ink);
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .chips button {
+        padding: 7px 16px;
+        border: 1px solid var(--line);
+        background: var(--mist);
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--slate);
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .chips button.on,
+      .chips button:hover {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+      .g {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 20px;
+      }
+      .s8 {
+        grid-column: span 8;
+      }
+      .s4 {
+        grid-column: span 4;
+      }
+      .s6 {
+        grid-column: span 6;
+      }
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .stat {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--ink);
+        padding: 16px 18px;
+        transition: 0.25s;
+      }
+      .stat:hover {
+        border-left-color: var(--gold);
+      }
+      .stat h2 {
+        font-family: var(--serif);
+        font-size: 34px;
+        line-height: 1.1;
+      }
+      .stat p {
+        font-size: 13px;
+        color: var(--slate);
+        font-weight: 600;
+        margin-top: 4px;
+      }
+      .delta {
+        font-size: 12px;
+        color: var(--good);
+        font-weight: 700;
+      }
+      .delta.down {
+        color: var(--bad);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th {
+        text-align: left;
+        font-size: 12px;
+        color: var(--slate);
+        font-weight: 700;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      td {
+        padding: 13px 12px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--mist);
+        white-space: nowrap;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      tbody tr:hover {
+        background: var(--mist);
+      }
+      .badge {
+        padding: 4px 12px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .badge.ok {
+        background: rgba(30, 138, 85, 0.13);
+        color: var(--good);
+      }
+      .badge.prog {
+        background: rgba(16, 27, 54, 0.09);
+        color: var(--ink);
+      }
+      .badge.pend {
+        background: rgba(217, 164, 65, 0.22);
+        color: var(--warn);
+      }
+      .pg {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .pg button {
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--line);
+        background: var(--mist);
+        border-radius: 4px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .pg button.on {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+      }
+
+      /* overview widgets */
+      .qa {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .qa button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border: 0;
+        border-right: 1px solid var(--line);
+        background: none;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .qa button:last-child {
+        border: 0;
+      }
+      .qa button:hover {
+        background: var(--mist);
+      }
+      .qa span {
+        color: var(--gold);
+      }
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 14px;
+        height: 190px;
+      }
+      .bar {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--slate);
+        font-weight: 600;
+      }
+      .bar i {
+        display: block;
+        width: 60%;
+        background: var(--ink);
+        border-radius: 4px 4px 0 0;
+        min-height: 6px;
+      }
+      .bar:last-child i {
+        background: var(--gold);
+      }
+      .rank {
+        display: grid;
+        gap: 16px;
+      }
+      .rk-l {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .rk-t {
+        height: 6px;
+        background: var(--mist);
+        border-radius: 3px;
+      }
+      .rk-t i {
+        display: block;
+        height: 100%;
+        background: var(--gold);
+        border-radius: 3px;
+      }
+      .list {
+        display: grid;
+        gap: 8px;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px;
+        border-radius: 4px;
+      }
+      .item:hover {
+        background: var(--mist);
+      }
+      .dbox {
+        background: var(--ink);
+        color: #fff;
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-family: var(--serif);
+        font-weight: 700;
+        line-height: 1;
+      }
+      .dbox small {
+        font-family: var(--sans);
+        font-size: 10px;
+        font-weight: 600;
+        color: var(--gold);
+        margin-top: 2px;
+      }
+      .item h5 {
+        font-size: 14px;
+      }
+      .item p {
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .tl {
+        display: grid;
+        gap: 0;
+      }
+      .tl div {
+        position: relative;
+        padding: 0 0 18px 44px;
+      }
+      .tl div::before {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 32px;
+        bottom: 0;
+        width: 1px;
+        background: var(--line);
+      }
+      .tl div:last-child::before {
+        display: none;
+      }
+      .tl span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(217, 164, 65, 0.22);
+        color: var(--warn);
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+      }
+      .tl h5 {
+        font-size: 14px;
+      }
+      .tl p {
+        font-size: 12px;
+        color: var(--slate);
+      }
+
+      /* events + venues */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: 0.25s;
+      }
+      .card:hover {
+        border-color: var(--gold);
+      }
+      .card .im {
+        position: relative;
+        height: 150px;
+      }
+      .card .im img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #c9d0de;
+      }
+      .card .tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--gold);
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 12px;
+        border-radius: 30px;
+      }
+      .card .cb {
+        padding: 14px 16px;
+      }
+      .card h4 {
+        font-family: var(--serif);
+        font-size: 18px;
+      }
+      .card .loc {
+        font-size: 13px;
+        color: var(--slate);
+        margin-bottom: 10px;
+      }
+      .card .meta {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid var(--line);
+        padding-top: 10px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .meter {
+        height: 5px;
+        background: var(--mist);
+        border-radius: 3px;
+        margin-bottom: 10px;
+      }
+      .meter i {
+        display: block;
+        height: 100%;
+        background: var(--ink);
+        border-radius: 3px;
+      }
+
+      /* team + clients */
+      .tgrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .tcard {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 14px;
+        transition: 0.25s;
+      }
+      .tcard:hover {
+        border-color: var(--gold);
+      }
+      .tcard img {
+        width: clamp(40px, 5vw, 70px);
+        height: clamp(40px, 5vw, 70px);
+        border-radius: 4px;
+        object-fit: cover;
+        object-position: top;
+        flex-shrink: 0;
+      }
+      .tcard h4 {
+        font-family: var(--serif);
+        font-size: clamp(14px, 1.5vw, 17px);
+      }
+      .tcard p {
+        font-size: clamp(10px, 1.1vw, 13px);
+        color: var(--slate);
+        margin-bottom: 6px;
+      }
+      .tcard > div:last-child {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+      }
+      .tcard .ic {
+        width: 25px;
+        height: 25px;
+        border-radius: 4px;
+        background: rgba(217, 164, 65, 0.22);
+        color: var(--warn);
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+        cursor: pointer;
+      }
+      .tk {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      .tk div {
+        flex: 1;
+        min-width: 0;
+      }
+      .tk h5 {
+        font-size: 14px;
+      }
+      .tk p {
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .tk img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      /* pipeline, inbox, calendar */
+      .pipe {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .pipe h4 {
+        font-size: 14px;
+        color: var(--slate);
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+        border-bottom: 3px solid var(--ink);
+      }
+      .pcard {
+        background: var(--mist);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+      .pcard h5 {
+        font-size: 14px;
+      }
+      .pcard p {
+        font-size: 12px;
+        color: var(--slate);
+        margin-bottom: 6px;
+      }
+      .pcard b {
+        font-family: var(--serif);
+      }
+      .inbox .row {
+        display: flex;
+        gap: 14px;
+        padding: 14px 8px;
+        border-bottom: 1px solid var(--line);
+        cursor: pointer;
+      }
+      .inbox .row:last-child {
+        border: 0;
+      }
+      .inbox .row:hover {
+        background: var(--mist);
+      }
+      .inbox .row.un {
+        border-left: 3px solid var(--gold);
+      }
+      .inbox img {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .inbox .bd {
+        flex: 1;
+        min-width: 0;
+      }
+      .inbox .tp {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .inbox h5 {
+        font-size: 14px;
+      }
+      .inbox small {
+        color: var(--slate);
+        font-size: 12px;
+      }
+      .inbox p {
+        font-size: 13px;
+        color: var(--slate);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cal {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+      }
+      .cal .dw {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--slate);
+        text-align: center;
+        padding-bottom: 6px;
+      }
+      .cal .c {
+        aspect-ratio: 1;
+        border: 1px solid var(--line);
+        padding: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        position: relative;
+        border-radius: 4px;
+      }
+      .cal .c.m {
+        color: #b9c0cf;
+      }
+      .cal .c.ev::after {
+        content: "";
+        position: absolute;
+        bottom: 6px;
+        left: 6px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+      .cal .c.td {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+      }
+
+      @media (max-width: 1250px) {
+        .s8,
+        .s4,
+        .s6 {
+          grid-column: span 12;
+        }
+      }
+      @media (max-width: 1100px) {
+        .stat-row,
+        .cards,
+        .pipe {
+          grid-template-columns: 1fr 1fr;
+        }
+        .qa {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 900px) {
+        .sb {
+          position: fixed;
+          inset: 0 auto 0 0;
+          transform: translateX(-110%);
+          z-index: 9999;
+          width: 280px !important;
+          transition: 0.25s;
+        }
+        .sb.vis {
+          transform: none;
+        }
+        .sb.min .lbl,
+        .sb.min .grp,
+        .sb.min .cnt,
+        .sb.min .who,
+        .sb.min .sb-logo img {
+          display: initial;
+        }
+        .rail {
+          display: none;
+        }
+        .sclose {
+          display: grid;
+        }
+        .mob {
+          display: flex;
+        }
+        .top h2 {
+          display: none;
+        }
+        .top {
+          padding: 14px 16px;
+        }
+        .body {
+          padding: 18px 16px 30px;
+        }
+        .tgrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 560px) {
+        .stat-row,
+        .cards,
+        .pipe,
+        .qa {
+          grid-template-columns: 1fr;
+        }
+        .date,
+        #title {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <aside class="sb" id="sb">
+      <div class="sb-top">
+        <a href="index.html" class="sb-logo"><img src="./src/logo.webp" alt="Company logo" /></a>
+        <button class="rail" id="rail" aria-label="Collapse sidebar">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button class="sclose" id="sclose" aria-label="Close menu">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="sb-scroll">
+        <p class="grp">Event management</p>
+        <nav class="nav">
+          <button class="on" data-v="overview">
+            <span class="material-symbols-outlined">dashboard</span><span class="lbl">Overview</span>
+          </button>
+          <button data-v="enquiries">
+            <span class="material-symbols-outlined">assignment</span><span class="lbl">Enquiries</span
+            ><span class="cnt">14</span>
+          </button>
+          <button data-v="events">
+            <span class="material-symbols-outlined">event</span><span class="lbl">Events</span>
+          </button>
+          <button data-v="team">
+            <span class="material-symbols-outlined">badge</span><span class="lbl">Event managers</span>
+          </button>
+          <button data-v="venues">
+            <span class="material-symbols-outlined">location_city</span><span class="lbl">Venues</span>
+          </button>
+          <button data-v="clients">
+            <span class="material-symbols-outlined">groups</span><span class="lbl">Clients</span>
+          </button>
+        </nav>
+        <p class="grp">Insights and tools</p>
+        <nav class="nav">
+          <button data-v="payments">
+            <span class="material-symbols-outlined">payments</span><span class="lbl">Bookings</span>
+          </button>
+          <button data-v="messages">
+            <span class="material-symbols-outlined">forum</span><span class="lbl">Messages</span
+            ><span class="cnt">5</span>
+          </button>
+          <!-- <button data-v="calendar"><span class="material-symbols-outlined">calendar_month</span><span
+            class="lbl">Calendar</span></button> -->
+          <button id="logout">
+            <span class="material-symbols-outlined">logout</span><span class="lbl">Logout</span>
+          </button>
+        </nav>
+      </div>
+      <div class="sb-foot">
+        <img
+          src="./src/img13.webp" 
+          alt="Admin"
+        />
+        <div class="who">
+          <h4 id="uname">Divya Krishnan</h4>
+          <small>Admin</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="top">
+        <div class="top1">
+          <div class="crumb">
+            Dashboard <span class="material-symbols-outlined" style="font-size: 16px">chevron_right</span
+            ><b id="crumb">Overview</b>
+          </div>
+          <span class="date" id="date">Thursday, Sep 24, 2026</span>
+        </div>
+        <div class="top2">
+          <div class="mob">
+            <span class="material-symbols-outlined" id="menu">menu</span
+            ><a href="index.html"><img src="./src/logo.webp" alt="Company logo" /></a>
+          </div>
+          <h2 id="title">Overview</h2>
+          <div class="tr">
+            <div class="ibtn go404"><span class="material-symbols-outlined">notifications</span><i></i></div>
+            <div class="ibtn go404"><span class="material-symbols-outlined">mail</span></div>
+            <div class="avatar">
+              <img
+                src="./src/img13.webp" 
+                alt="Admin"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="body">
+        <!-- Overview -->
+        <div class="view on" id="overview">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>18</h2>
+              <p>Upcoming events</p>
+              <span class="delta">+3 this month</span>
+            </div>
+            <div class="stat">
+              <h2>12,485</h2>
+              <p>Registrations</p>
+              <span class="delta">+8.4% vs last month</span>
+            </div>
+            <div class="stat">
+              <h2>32</h2>
+              <p>Event managers</p>
+              <span class="delta">+2 new this month</span>
+            </div>
+            <div class="stat">
+              <h2>14</h2>
+              <p>Pending proposals</p>
+              <span class="delta down">Follow-up needed</span>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Quick actions</h3>
+            <div class="qa">
+              <button class="go404"><span class="material-symbols-outlined">add_circle</span>Create event</button>
+              <button class="go404"><span class="material-symbols-outlined">request_quote</span>New proposal</button>
+              <button class="go404"><span class="material-symbols-outlined">person_add</span>Add manager</button>
+              <button class="go404"><span class="material-symbols-outlined">summarize</span>Generate report</button>
+            </div>
+          </div>
+          <div class="g">
+            <div class="panel s8">
+              <div class="ph">
+                <h3>Events delivered</h3>
+                <span class="date">Last 6 months</span>
+              </div>
+              <div class="bars" id="bars">
+                <div class="bar"><i style="height: 55%"></i>Apr</div>
+                <div class="bar"><i style="height: 64%"></i>May</div>
+                <div class="bar"><i style="height: 60%"></i>Jun</div>
+                <div class="bar"><i style="height: 78%"></i>Jul</div>
+                <div class="bar"><i style="height: 84%"></i>Aug</div>
+                <div class="bar"><i style="height: 100%"></i>Sep</div>
+              </div>
+            </div>
+            <div class="panel s4">
+              <h3>Top cities by demand</h3>
+              <div class="rank" id="rank">
+                <div>
+                  <div class="rk-l"><span>Chennai</span><span>82%</span></div>
+                  <div class="rk-t"><i style="width: 82%"></i></div>
+                </div>
+                <div>
+                  <div class="rk-l"><span>Bengaluru</span><span>67%</span></div>
+                  <div class="rk-t"><i style="width: 67%"></i></div>
+                </div>
+                <div>
+                  <div class="rk-l"><span>Coimbatore</span><span>54%</span></div>
+                  <div class="rk-t"><i style="width: 54%"></i></div>
+                </div>
+                <div>
+                  <div class="rk-l"><span>Kochi</span><span>41%</span></div>
+                  <div class="rk-t"><i style="width: 41%"></i></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel s8">
+              <div class="ph">
+                <h3>Recent enquiry activity</h3>
+                <button class="btn go404">View all</button>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Reference</th>
+                    <th>Event enquired</th>
+                    <th>Latest update</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="ovq">
+                  <tr>
+                    <td>#ENQ-3105</td>
+                    <td>Annual sales summit</td>
+                    <td>Contract signed</td>
+                    <td><span class="badge ok">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td>#ENQ-3102</td>
+                    <td>Product launch, Bengaluru</td>
+                    <td>Price negotiation</td>
+                    <td><span class="badge prog">In progress</span></td>
+                  </tr>
+                  <tr>
+                    <td>#ENQ-3098</td>
+                    <td>Dealer meet, Coimbatore</td>
+                    <td>Awaiting brief</td>
+                    <td><span class="badge pend">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td>#ENQ-3094</td>
+                    <td>Awards night, Chennai</td>
+                    <td>Venue booked</td>
+                    <td><span class="badge ok">Confirmed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel s4">
+              <h3>Upcoming events</h3>
+              <div class="list" id="ovev">
+                <div class="item">
+                  <div class="dbox">14<small>Nov</small></div>
+                  <div>
+                    <h5>Global Leadership Summit</h5>
+                    <p>Chennai Trade Centre</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">02<small>Dec</small></div>
+                  <div>
+                    <h5>Manufacturing Tech Expo</h5>
+                    <p>Codissia Hall, Coimbatore</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">19<small>Dec</small></div>
+                  <div>
+                    <h5>Annual Excellence Awards</h5>
+                    <p>Taj Coromandel, Chennai</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">08<small>Jan</small></div>
+                  <div>
+                    <h5>Sales Kickoff Retreat</h5>
+                    <p>Ooty, Tamil Nadu</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel s6">
+              <h3>Portfolio health</h3>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Average budget variance</td>
+                    <td style="text-align: right; font-weight: 700">-2.4%</td>
+                  </tr>
+                  <tr>
+                    <td>Events delivered this quarter</td>
+                    <td style="text-align: right; font-weight: 700">64</td>
+                  </tr>
+                  <tr>
+                    <td>Managers on site today</td>
+                    <td style="text-align: right; font-weight: 700">21 / 32</td>
+                  </tr>
+                  <tr>
+                    <td>Client complaints pending</td>
+                    <td style="text-align: right; font-weight: 700">3</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="panel s6">
+              <h3>Recent activity</h3>
+              <div class="tl">
+                <div>
+                  <span class="material-symbols-outlined">task_alt</span>
+                  <h5>Proposal #ENQ-3105 approved by Finserv Group</h5>
+                  <p>Meera Subramaniam, 10 minutes ago</p>
+                </div>
+                <div>
+                  <span class="material-symbols-outlined">person_add</span>
+                  <h5>New event manager onboarded: Kavya Reddy</h5>
+                  <p>HR desk, 2 hours ago</p>
+                </div>
+                <div>
+                  <span class="material-symbols-outlined">event_available</span>
+                  <h5>Venue confirmed for Global Leadership Summit</h5>
+                  <p>Production team, 5 hours ago</p>
+                </div>
+                <div>
+                  <span class="material-symbols-outlined">report</span>
+                  <h5>Client complaint ticket #TCK-1045 raised</h5>
+                  <p>Client care, yesterday</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enquiries -->
+        <div class="view" id="enquiries">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>14</h2>
+              <p>Open enquiries</p>
+            </div>
+            <div class="stat">
+              <h2>26</h2>
+              <p>New this week</p>
+            </div>
+            <div class="stat">
+              <h2>1,200</h2>
+              <p>Events delivered</p>
+            </div>
+            <div class="stat">
+              <h2>5</h2>
+              <p>Flagged enquiries</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph">
+              <h3>Proposal requests</h3>
+              <button class="btn go404">New enquiry</button>
+            </div>
+            <div class="chips" style="margin-bottom: 16px">
+              <button class="on go404">All</button><button class="go404">Confirmed</button
+              ><button class="go404">In progress</button><button class="go404">Pending</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Reference</th>
+                  <th>Client</th>
+                  <th>Event</th>
+                  <th>Manager</th>
+                  <th>Received</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="enq">
+                <tr>
+                  <td>#ENQ-3105</td>
+                  <td>Finserv Group</td>
+                  <td>Annual sales summit</td>
+                  <td>Meera Subramaniam</td>
+                  <td>Sep 21</td>
+                  <td><span class="badge ok">Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>#ENQ-3102</td>
+                  <td>Cloudline Technologies</td>
+                  <td>Product launch, Bengaluru</td>
+                  <td>Arjun Nair</td>
+                  <td>Sep 20</td>
+                  <td><span class="badge prog">In progress</span></td>
+                </tr>
+                <tr>
+                  <td>#ENQ-3098</td>
+                  <td>Southern Auto Suppliers</td>
+                  <td>Dealer meet, Coimbatore</td>
+                  <td>Vikram Balan</td>
+                  <td>Sep 19</td>
+                  <td><span class="badge pend">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>#ENQ-3094</td>
+                  <td>Nexa Pharma</td>
+                  <td>Awards night, Chennai</td>
+                  <td>Divya Krishnan</td>
+                  <td>Sep 18</td>
+                  <td><span class="badge ok">Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>#ENQ-3089</td>
+                  <td>Brightpath Education</td>
+                  <td>Team offsite, Ooty</td>
+                  <td>Vikram Balan</td>
+                  <td>Sep 17</td>
+                  <td><span class="badge prog">In progress</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pg">
+              <button class="go404">&lt;</button><button class="on">1</button><button class="go404">2</button
+              ><button class="go404">3</button><button class="go404">&gt;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Events -->
+        <div class="view" id="events">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>18</h2>
+              <p>Upcoming</p>
+            </div>
+            <div class="stat">
+              <h2>6</h2>
+              <p>Conferences</p>
+            </div>
+            <div class="stat">
+              <h2>4</h2>
+              <p>Exhibitions</p>
+            </div>
+            <div class="stat">
+              <h2>3</h2>
+              <p>Galas</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph">
+              <h3>Event calendar</h3>
+              <div class="chips">
+                <button class="on go404">All</button><button class="go404">Conferences</button
+                ><button class="go404">Exhibitions</button><button class="go404">Galas</button
+                ><button class="go404">Offsites</button>
+              </div>
+            </div>
+            <div class="cards" id="evcards">
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img10.webp" 
+                    alt="Global Leadership Summit"
+                  /><span class="tag">Conference</span>
+                </div>
+                <div class="cb">
+                  <h4>Global Leadership Summit</h4>
+                  <p class="loc">Chennai Trade Centre, 14 Nov</p>
+                  <div class="meter"><i style="width: 81%"></i></div>
+                  <div class="meta"><span>812 registered</span><span>1000 seats</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img11.webp" 
+                    alt="Manufacturing Tech Expo"
+                  /><span class="tag">Exhibition</span>
+                </div>
+                <div class="cb">
+                  <h4>Manufacturing Tech Expo</h4>
+                  <p class="loc">Codissia Hall, Coimbatore, 02 Dec</p>
+                  <div class="meter"><i style="width: 80%"></i></div>
+                  <div class="meta"><span>96 registered</span><span>120 seats</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img12.webp" 
+                    alt="Annual Excellence Awards"
+                  /><span class="tag">Gala</span>
+                </div>
+                <div class="cb">
+                  <h4>Annual Excellence Awards</h4>
+                  <p class="loc">Taj Coromandel, Chennai, 19 Dec</p>
+                  <div class="meter"><i style="width: 84%"></i></div>
+                  <div class="meta"><span>380 registered</span><span>450 seats</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img1.webp" 
+                    alt="Sales Kickoff Retreat"
+                  /><span class="tag">Offsite</span>
+                </div>
+                <div class="cb">
+                  <h4>Sales Kickoff Retreat</h4>
+                  <p class="loc">Ooty, Tamil Nadu, 08 Jan</p>
+                  <div class="meter"><i style="width: 80%"></i></div>
+                  <div class="meta"><span>120 registered</span><span>150 seats</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img2.webp"
+                    alt="Fintech Product Launch Day"
+                  /><span class="tag">Launch</span>
+                </div>
+                <div class="cb">
+                  <h4>Fintech Product Launch Day</h4>
+                  <p class="loc">Bengaluru International Centre, 21 Jan</p>
+                  <div class="meter"><i style="width: 70%"></i></div>
+                  <div class="meta"><span>210 registered</span><span>300 seats</span></div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img3.webp"
+                    alt="HR Leaders Conclave"
+                  /><span class="tag">Conference</span>
+                </div>
+                <div class="cb">
+                  <h4>HR Leaders Conclave</h4>
+                  <p class="loc">Grand Hyatt, Kochi, 06 Feb</p>
+                  <div class="meter"><i style="width: 65%"></i></div>
+                  <div class="meta"><span>260 registered</span><span>400 seats</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team -->
+        <div class="view" id="team">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>32</h2>
+              <p>Event managers</p>
+            </div>
+            <div class="stat">
+              <h2>9</h2>
+              <p>Senior managers</p>
+            </div>
+            <div class="stat">
+              <h2>23</h2>
+              <p>Field managers</p>
+            </div>
+            <div class="stat">
+              <h2>4</h2>
+              <p>On leave</p>
+            </div>
+          </div>
+          <div class="g">
+            <div class="panel s8">
+              <div class="ph">
+                <h3>Manager roster</h3>
+                <div class="chips">
+                  <button class="on go404">All</button><button class="go404">Conferences</button
+                  ><button class="go404">Production</button><button class="go404">Logistics</button>
+                </div>
+              </div>
+              <div class="tgrid" id="tgrid">
+                <div class="tcard">
+                  <img
+                    src="./src/img16.webp"
+                    alt="Divya Krishnan"
+                  />
+                  <div>
+                    <h4>Divya Krishnan</h4>
+                    <p>Head of Conferences, 6 events</p>
+                    <span class="badge ok">On site</span>
+                  </div>
+                  <div>
+                    <span class="material-symbols-outlined ic go404">mail</span
+                    ><span class="material-symbols-outlined ic go404">call</span>
+                  </div>
+                </div>
+                <div class="tcard">
+                  <img
+                    src="./src/img17.webp"
+                    alt="Arjun Nair"
+                  />
+                  <div>
+                    <h4>Arjun Nair</h4>
+                    <p>Production Director, 5 events</p>
+                    <span class="badge ok">On site</span>
+                  </div>
+                  <div>
+                    <span class="material-symbols-outlined ic go404">mail</span
+                    ><span class="material-symbols-outlined ic go404">call</span>
+                  </div>
+                </div>
+                <div class="tcard">
+                  <img
+                    src="./src/img18.webp"
+                    alt="Meera Subramaniam"
+                  />
+                  <div>
+                    <h4>Meera Subramaniam</h4>
+                    <p>Client Partnerships, 4 events</p>
+                    <span class="badge pend">On leave</span>
+                  </div>
+                  <div>
+                    <span class="material-symbols-outlined ic go404">mail</span
+                    ><span class="material-symbols-outlined ic go404">call</span>
+                  </div>
+                </div>
+                <div class="tcard">
+                  <img
+                    src="./src/img14.webp"
+                    alt="Vikram Balan"
+                  />
+                  <div>
+                    <h4>Vikram Balan</h4>
+                    <p>Travel and Logistics, 4 events</p>
+                    <span class="badge ok">On site</span>
+                  </div>
+                  <div>
+                    <span class="material-symbols-outlined ic go404">mail</span
+                    ><span class="material-symbols-outlined ic go404">call</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel s4">
+              <h3>On leave today</h3>
+              <div class="list" id="leave">
+                <div class="item">
+                  <div class="dbox">23<small>Sep</small></div>
+                  <div>
+                    <h5>Meera Subramaniam</h5>
+                    <p>Client partnerships, back Sep 28</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">23<small>Sep</small></div>
+                  <div>
+                    <h5>Sameer Qureshi</h5>
+                    <p>Exhibitions, back Sep 26</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">24<small>Sep</small></div>
+                  <div>
+                    <h5>Fatima Sheikh</h5>
+                    <p>Offsites, back Sep 29</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Venues -->
+        <div class="view" id="venues">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>24</h2>
+              <p>Partner venues</p>
+            </div>
+            <div class="stat">
+              <h2>6</h2>
+              <p>Cities covered</p>
+            </div>
+            <div class="stat">
+              <h2>9</h2>
+              <p>Booked this month</p>
+            </div>
+            <div class="stat">
+              <h2>3</h2>
+              <p>Awaiting contract</p>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Partner venues</h3>
+            <div class="cards" id="vcards">
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/img9.webp"
+                    alt="Chennai Trade Centre"
+                  /><span class="tag">9 events</span>
+                </div>
+                <div class="cb">
+                  <h4>Chennai Trade Centre</h4>
+                  <p class="loc">Chennai, 1,500 capacity</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/image_7.webp"
+                    alt="Codissia Hall"
+                  /><span class="tag">6 events</span>
+                </div>
+                <div class="cb">
+                  <h4>Codissia Hall</h4>
+                  <p class="loc">Coimbatore, 2,000 capacity</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="im">
+                  <img
+                    src="./src/image_2.webp"
+                    alt="Grand Hyatt"
+                  /><span class="tag">3 events</span>
+                </div>
+                <div class="cb">
+                  <h4>Grand Hyatt</h4>
+                  <p class="loc">Kochi, 600 capacity</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Venue snapshot</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Venue</th>
+                  <th>City</th>
+                  <th>Capacity</th>
+                  <th>Events booked</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Chennai Trade Centre</td>
+                  <td>Chennai</td>
+                  <td>1,500</td>
+                  <td>9</td>
+                  <td><span class="badge ok">Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>Codissia Hall</td>
+                  <td>Coimbatore</td>
+                  <td>2,000</td>
+                  <td>6</td>
+                  <td><span class="badge ok">Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>Grand Hyatt</td>
+                  <td>Kochi</td>
+                  <td>600</td>
+                  <td>3</td>
+                  <td><span class="badge pend">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Clients -->
+        <div class="view" id="clients">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>352</h2>
+              <p>Total clients</p>
+            </div>
+            <div class="stat">
+              <h2>21</h2>
+              <p>New this month</p>
+            </div>
+            <div class="stat">
+              <h2>118</h2>
+              <p>Repeat clients</p>
+            </div>
+            <div class="stat">
+              <h2>8</h2>
+              <p>Open support tickets</p>
+            </div>
+          </div>
+          <div class="g">
+            <div class="panel s8">
+              <div class="ph">
+                <h3>Client directory</h3>
+                <button class="btn go404">Add client</button>
+              </div>
+              <div class="chips" style="margin-bottom: 16px">
+                <button class="on go404">All</button><button class="go404">Enterprise</button
+                ><button class="go404">Mid-size</button><button class="go404">Startups</button>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Contact</th>
+                    <th>Company</th>
+                    <th>Email</th>
+                    <th>Events booked</th>
+                  </tr>
+                </thead>
+                <tbody id="cl">
+                  <tr>
+                    <td><b>Ananya Rao</b></td>
+                    <td>Finserv Group</td>
+                    <td>ananya.rao@finservgroup.com</td>
+                    <td>8</td>
+                  </tr>
+                  <tr>
+                    <td><b>Karthik Iyer</b></td>
+                    <td>Cloudline Technologies</td>
+                    <td>karthik.i@cloudline.com</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td><b>Priya Menon</b></td>
+                    <td>Southern Auto Suppliers</td>
+                    <td>priya.m@southernauto.com</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td><b>Rahul Menon</b></td>
+                    <td>Nexa Pharma</td>
+                    <td>rahul.m@nexapharma.com</td>
+                    <td>3</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="pg">
+                <button class="go404">&lt;</button><button class="on">1</button><button class="go404">2</button
+                ><button class="go404">&gt;</button>
+              </div>
+            </div>
+            <div class="panel s4">
+              <h3>Open support tickets</h3>
+              <div class="list" id="tickets">
+                <div class="tk">
+                  <img
+                    src="./src/img13.webp"
+                    alt=""
+                  />
+                  <div>
+                    <h5>Invoice correction</h5>
+                    <p>Ananya Rao, #TCK-1045</p>
+                  </div>
+                  <span class="badge pend">Open</span>
+                </div>
+                <div class="tk">
+                  <img
+                    src="./src/img14.webp"
+                    alt=""
+                  />
+                  <div>
+                    <h5>Guest list upload issue</h5>
+                    <p>Karthik Iyer, #TCK-1042</p>
+                  </div>
+                  <span class="badge prog">In progress</span>
+                </div>
+                <div class="tk">
+                  <img
+                    src="./src/img15.webp"
+                    alt=""
+                  />
+                  <div>
+                    <h5>Change of venue timing</h5>
+                    <p>Priya Menon, #TCK-1039</p>
+                  </div>
+                  <span class="badge pend">Open</span>
+                </div>
+                <div class="tk">
+                  <img
+                    src="./src/img16.webp"
+                    alt=""
+                  />
+                  <div>
+                    <h5>Badge printing query</h5>
+                    <p>Rahul Menon, #TCK-1031</p>
+                  </div>
+                  <span class="badge ok">Resolved</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bookings -->
+        <div class="view" id="payments">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>₹3.2 Cr</h2>
+              <p>Booked this quarter</p>
+            </div>
+            <div class="stat">
+              <h2>64</h2>
+              <p>Events confirmed</p>
+            </div>
+            <div class="stat">
+              <h2>₹9.5 L</h2>
+              <p>Average event value</p>
+            </div>
+            <div class="stat">
+              <h2>11</h2>
+              <p>Awaiting deposit</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph">
+              <h3>Booking pipeline</h3>
+              <button class="btn go404">Add booking</button>
+            </div>
+            <div class="pipe" id="pipe">
+              <div>
+                <h4>Enquiry</h4>
+                <div class="pcard">
+                  <h5>Sales kickoff, Ooty</h5>
+                  <p>Brightpath Education</p>
+                  <b>₹6.5 L</b>
+                </div>
+                <div class="pcard">
+                  <h5>HR conclave</h5>
+                  <p>Peoplefirst Ltd</p>
+                  <b>₹12 L</b>
+                </div>
+              </div>
+              <div>
+                <h4>Proposal sent</h4>
+                <div class="pcard">
+                  <h5>Product launch</h5>
+                  <p>Cloudline Technologies</p>
+                  <b>₹18 L</b>
+                </div>
+              </div>
+              <div>
+                <h4>Contract signed</h4>
+                <div class="pcard">
+                  <h5>Dealer meet</h5>
+                  <p>Southern Auto Suppliers</p>
+                  <b>₹9 L</b>
+                </div>
+                <div class="pcard">
+                  <h5>Awards night</h5>
+                  <p>Nexa Pharma</p>
+                  <b>₹22 L</b>
+                </div>
+              </div>
+              <div>
+                <h4>Confirmed</h4>
+                <div class="pcard">
+                  <h5>Annual sales summit</h5>
+                  <p>Finserv Group</p>
+                  <b>₹35 L</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="view" id="messages">
+          <div class="stat-row">
+            <div class="stat">
+              <h2>5</h2>
+              <p>Unread messages</p>
+            </div>
+            <div class="stat">
+              <h2>18</h2>
+              <p>Active conversations</p>
+            </div>
+            <div class="stat">
+              <h2>14 min</h2>
+              <p>Avg. response time</p>
+            </div>
+            <div class="stat">
+              <h2>96%</h2>
+              <p>Client satisfaction</p>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="ph">
+              <h3>Inbox</h3>
+              <div class="chips">
+                <button class="on go404">All</button><button class="go404">Unread</button
+                ><button class="go404">Clients</button><button class="go404">Managers</button>
+              </div>
+            </div>
+            <div class="inbox" id="inbox">
+              <div class="row un go404">
+                <img
+                  src="./src/img13.webp"
+                  alt=""
+                />
+                <div class="bd">
+                  <div class="tp">
+                    <h5>Ananya Rao</h5>
+                    <small>9:42 AM</small>
+                  </div>
+                  <p>Can we move the rehearsal to the evening before the summit?</p>
+                </div>
+              </div>
+              <div class="row un go404">
+                <img
+                  src="./src/img14.webp"
+                  alt=""
+                />
+                <div class="bd">
+                  <div class="tp">
+                    <h5>Karthik Iyer</h5>
+                    <small>Yesterday</small>
+                  </div>
+                  <p>Sharing the final speaker list for the launch event.</p>
+                </div>
+              </div>
+              <div class="row un go404">
+                <img
+                  src="./src/img15.webp"
+                  alt=""
+                />
+                <div class="bd">
+                  <div class="tp">
+                    <h5>Arjun Nair (Manager)</h5>
+                    <small>Yesterday</small>
+                  </div>
+                  <p>Client wants a revised AV quote for the awards night.</p>
+                </div>
+              </div>
+              <div class="row go404">
+                <img
+                  src="./src/img16.webp"
+                  alt=""
+                />
+                <div class="bd">
+                  <div class="tp">
+                    <h5>Priya Menon</h5>
+                    <small>Mon</small>
+                  </div>
+                  <p>Thank you for the smooth dealer meet last week!</p>
+                </div>
+              </div>
+              <div class="row go404">
+                <img
+                  src="./src/img17.webp"
+                  alt=""
+                />
+                <div class="bd">
+                  <div class="tp">
+                    <h5>Rahul Menon</h5>
+                    <small>Mon</small>
+                  </div>
+                  <p>Following up on the venue contract copy.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="view" id="calendar">
+          <div class="g">
+            <div class="panel s8">
+              <div class="ph">
+                <h3 id="calTitle">September 2026</h3>
+              </div>
+              <div class="cal" id="cal">
+                <div class="dw">Sun</div>
+                <div class="dw">Mon</div>
+                <div class="dw">Tue</div>
+                <div class="dw">Wed</div>
+                <div class="dw">Thu</div>
+                <div class="dw">Fri</div>
+                <div class="dw">Sat</div>
+                <div class="c m">30</div>
+                <div class="c m">31</div>
+                <div class="c">1</div>
+                <div class="c ev">2</div>
+                <div class="c">3</div>
+                <div class="c">4</div>
+                <div class="c">5</div>
+                <div class="c">6</div>
+                <div class="c">7</div>
+                <div class="c ev">8</div>
+                <div class="c">9</div>
+                <div class="c">10</div>
+                <div class="c">11</div>
+                <div class="c">12</div>
+                <div class="c">13</div>
+                <div class="c ev">14</div>
+                <div class="c">15</div>
+                <div class="c">16</div>
+                <div class="c">17</div>
+                <div class="c">18</div>
+                <div class="c">19</div>
+                <div class="c">20</div>
+                <div class="c">21</div>
+                <div class="c">22</div>
+                <div class="c ev">23</div>
+                <div class="c td">24</div>
+                <div class="c">25</div>
+                <div class="c">26</div>
+                <div class="c">27</div>
+                <div class="c ev">28</div>
+                <div class="c">29</div>
+                <div class="c">30</div>
+                <div class="c m">1</div>
+                <div class="c m">2</div>
+                <div class="c m">3</div>
+              </div>
+            </div>
+            <div class="panel s4">
+              <h3>This week</h3>
+              <div class="list" id="week">
+                <div class="item">
+                  <div class="dbox">24<small>Sep</small></div>
+                  <div>
+                    <h5>Venue walkthrough, Chennai Trade Centre</h5>
+                    <p>10:00 AM</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">25<small>Sep</small></div>
+                  <div>
+                    <h5>Speaker briefing, Leadership Summit</h5>
+                    <p>2:00 PM</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="dbox">30<small>Sep</small></div>
+                  <div>
+                    <h5>Awards night rehearsal</h5>
+                    <p>All day</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const sb = $("sb");
+      const TITLES = {
+        overview: "Overview",
+        enquiries: "Enquiries",
+        events: "Events",
+        team: "Event managers",
+        venues: "Venues",
+        clients: "Clients",
+        payments: "Bookings",
+        messages: "Messages",
+        calendar: "Calendar",
+      };
+
+      // Image fallback colour
+      document.querySelectorAll("img").forEach((i) =>
+        i.addEventListener("error", () => {
+          i.style.background = "#c9d0de";
+        }),
+      );
+
+      // Navigation
+      document.querySelectorAll(".nav button[data-v]").forEach((b) =>
+        b.addEventListener("click", () => {
+          const id = b.dataset.v;
+          document.querySelectorAll(".view").forEach((v) => v.classList.remove("on"));
+          $(id).classList.add("on");
+          document.querySelectorAll(".nav button").forEach((x) => x.classList.remove("on"));
+          b.classList.add("on");
+          $("title").textContent = $("crumb").textContent = TITLES[id];
+          sb.classList.remove("vis");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }),
+      );
+      $("rail").addEventListener("click", () => {
+        sb.classList.toggle("min");
+        $("rail").firstElementChild.textContent = sb.classList.contains("min") ? "chevron_right" : "chevron_left";
+      });
+      $("menu").addEventListener("click", () => sb.classList.add("vis"));
+      $("sclose").addEventListener("click", () => sb.classList.remove("vis"));
+      $("logout").addEventListener("click", () => {
+        window.location.href = "index.html";
+      });
+
+      // Placeholder actions go to the 404 page
+      document.addEventListener("click", (e) => {
+        if (e.target.closest(".go404")) window.location.href = "404.html";
+      });
+
+      // Show the logged-in user's name
+      try {
+        const em = localStorage.getItem("useremail");
+        if (em) $("uname").textContent = em.split("@")[0];
+      } catch (e) {}
+    </script>
+  </body>
+</html>
